@@ -1,0 +1,326 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\MODSEN\\Library\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\validators\\authorvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\validators\\authorvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\validators\\bookvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\validators\\bookvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\services\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\services\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\services\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\interfaces\\iauthorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\interfaces\\iauthorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\interfaces\\ibookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\interfaces\\ibookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\dtos\\authordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\dtos\\authordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\dtos\\bookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\dtos\\bookdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|d:\\modsen\\library\\application\\application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{59EFEC66-E81C-41E7-9FC5-99F3D3CDA43D}|Application\\Application.csproj|solutionrelative:application\\application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|d:\\modsen\\library\\domain\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|solutionrelative:domain\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|d:\\modsen\\library\\domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|d:\\modsen\\library\\domain\\interfaces\\iauthorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\iauthorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|d:\\modsen\\library\\domain\\interfaces\\ibookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\ibookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|d:\\modsen\\library\\domain\\entities\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|d:\\modsen\\library\\domain\\entities\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C50D7-002B-4A40-9D73-0373A2A2A9D9}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}|IntegrationTests\\IntegrationTests.csproj|d:\\modsen\\library\\integrationtests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}|IntegrationTests\\IntegrationTests.csproj|solutionrelative:integrationtests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852980C6-5860-4574-98DE-B3533857A65C}|UnitTests\\UnitTests.csproj|d:\\modsen\\library\\unittests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852980C6-5860-4574-98DE-B3533857A65C}|UnitTests\\UnitTests.csproj|solutionrelative:unittests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthorValidator.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Validators\\AuthorValidator.cs",
+              "RelativeDocumentMoniker": "Application\\Validators\\AuthorValidator.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Validators\\AuthorValidator.cs",
+              "RelativeToolTip": "Application\\Validators\\AuthorValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:52:07.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BookValidator.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Validators\\BookValidator.cs",
+              "RelativeDocumentMoniker": "Application\\Validators\\BookValidator.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Validators\\BookValidator.cs",
+              "RelativeToolTip": "Application\\Validators\\BookValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:51:51.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Mappings\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "Application\\Mappings\\MappingProfile.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Mappings\\MappingProfile.cs",
+              "RelativeToolTip": "Application\\Mappings\\MappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:51:38.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthorService.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Services\\AuthorService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\AuthorService.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Services\\AuthorService.cs",
+              "RelativeToolTip": "Application\\Services\\AuthorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:51:25.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BookService.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Services\\BookService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\BookService.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Services\\BookService.cs",
+              "RelativeToolTip": "Application\\Services\\BookService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:51:08.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IAuthorService.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Interfaces\\IAuthorService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IAuthorService.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Interfaces\\IAuthorService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IAuthorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:50:35.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IBookService.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Interfaces\\IBookService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IBookService.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Interfaces\\IBookService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IBookService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:49:45.496Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthorDto.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\DTOs\\AuthorDto.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\AuthorDto.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\DTOs\\AuthorDto.cs",
+              "RelativeToolTip": "Application\\DTOs\\AuthorDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:49:30.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BookDto.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\DTOs\\BookDto.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\BookDto.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\DTOs\\BookDto.cs",
+              "RelativeToolTip": "Application\\DTOs\\BookDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:49:14.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Application",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Application\\Application.csproj",
+              "RelativeDocumentMoniker": "Application\\Application.csproj",
+              "ToolTip": "D:\\MODSEN\\Library\\Application\\Application.csproj",
+              "RelativeToolTip": "Application\\Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-09-19T07:47:38.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DomainException.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Domain\\Exceptions\\DomainException.cs",
+              "RelativeDocumentMoniker": "Domain\\Exceptions\\DomainException.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Domain\\Exceptions\\DomainException.cs",
+              "RelativeToolTip": "Domain\\Exceptions\\DomainException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:47:22.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:46:47.763Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IAuthorRepository.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Domain\\Interfaces\\IAuthorRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\IAuthorRepository.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Domain\\Interfaces\\IAuthorRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\IAuthorRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:46:27.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IBookRepository.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Domain\\Interfaces\\IBookRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\IBookRepository.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Domain\\Interfaces\\IBookRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\IBookRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:46:00.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Author.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Domain\\Entities\\Author.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Author.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Domain\\Entities\\Author.cs",
+              "RelativeToolTip": "Domain\\Entities\\Author.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:45:19.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Book.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\Domain\\Entities\\Book.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Book.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\Domain\\Entities\\Book.cs",
+              "RelativeToolTip": "Domain\\Entities\\Book.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:45:09.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\IntegrationTests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "IntegrationTests\\UnitTest1.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\IntegrationTests\\UnitTest1.cs",
+              "RelativeToolTip": "IntegrationTests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:43:03.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\MODSEN\\Library\\UnitTests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "UnitTests\\UnitTest1.cs",
+              "ToolTip": "D:\\MODSEN\\Library\\UnitTests\\UnitTest1.cs",
+              "RelativeToolTip": "UnitTests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T07:41:45.165Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
