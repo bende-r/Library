@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MODSEN\\Library\\UnitTests\\UnitTests.csproj": {}
+    "D:\\MODSEN\\library\\UnitTests\\UnitTests.csproj": {}
   },
   "projects": {
-    "D:\\MODSEN\\Library\\UnitTests\\UnitTests.csproj": {
+    "D:\\MODSEN\\library\\UnitTests\\UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MODSEN\\Library\\UnitTests\\UnitTests.csproj",
+        "projectUniqueName": "D:\\MODSEN\\library\\UnitTests\\UnitTests.csproj",
         "projectName": "UnitTests",
-        "projectPath": "D:\\MODSEN\\Library\\UnitTests\\UnitTests.csproj",
+        "projectPath": "D:\\MODSEN\\library\\UnitTests\\UnitTests.csproj",
         "packagesPath": "C:\\Users\\br242\\.nuget\\packages\\",
         "outputPath": "D:\\MODSEN\\Library\\UnitTests\\obj\\",
         "projectStyle": "PackageReference",

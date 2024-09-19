@@ -32,9 +32,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MODSEN\\Library\\Application\\Application.csproj",
+      "projectUniqueName": "D:\\MODSEN\\library\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "D:\\MODSEN\\Library\\Application\\Application.csproj",
+      "projectPath": "D:\\MODSEN\\library\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\br242\\.nuget\\packages\\",
       "outputPath": "D:\\MODSEN\\Library\\Application\\obj\\",
       "projectStyle": "PackageReference",
@@ -54,8 +54,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\MODSEN\\Library\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\MODSEN\\Library\\Domain\\Domain.csproj"
+            "D:\\MODSEN\\library\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\MODSEN\\library\\Domain\\Domain.csproj"
             }
           }
         }

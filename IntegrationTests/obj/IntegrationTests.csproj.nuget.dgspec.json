@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MODSEN\\Library\\IntegrationTests\\IntegrationTests.csproj": {}
+    "D:\\MODSEN\\library\\IntegrationTests\\IntegrationTests.csproj": {}
   },
   "projects": {
-    "D:\\MODSEN\\Library\\IntegrationTests\\IntegrationTests.csproj": {
+    "D:\\MODSEN\\library\\IntegrationTests\\IntegrationTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MODSEN\\Library\\IntegrationTests\\IntegrationTests.csproj",
+        "projectUniqueName": "D:\\MODSEN\\library\\IntegrationTests\\IntegrationTests.csproj",
         "projectName": "IntegrationTests",
-        "projectPath": "D:\\MODSEN\\Library\\IntegrationTests\\IntegrationTests.csproj",
+        "projectPath": "D:\\MODSEN\\library\\IntegrationTests\\IntegrationTests.csproj",
         "packagesPath": "C:\\Users\\br242\\.nuget\\packages\\",
         "outputPath": "D:\\MODSEN\\Library\\IntegrationTests\\obj\\",
         "projectStyle": "PackageReference",

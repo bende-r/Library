@@ -4,9 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Domain.Entities;
+
 namespace Domain.Interfaces
 {
-    internal interface IAuthorRepository
+    public interface IAuthorRepository
     {
+        Task<IEnumerable<Author>> GetAllAsync();
+        Task<Author> GetByIdAsync(int id);
+        Task AddAsync(Author author);
+        Task UpdateAsync(Author author);
+        Task DeleteAsync(int id);
     }
 }

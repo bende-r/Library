@@ -519,9 +519,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MODSEN\\Library\\API\\API.csproj",
+      "projectUniqueName": "D:\\MODSEN\\library\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\MODSEN\\Library\\API\\API.csproj",
+      "projectPath": "D:\\MODSEN\\library\\API\\API.csproj",
       "packagesPath": "C:\\Users\\br242\\.nuget\\packages\\",
       "outputPath": "D:\\MODSEN\\Library\\API\\obj\\",
       "projectStyle": "PackageReference",
@@ -541,11 +541,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\MODSEN\\Library\\Application\\Application.csproj": {
-              "projectPath": "D:\\MODSEN\\Library\\Application\\Application.csproj"
+            "D:\\MODSEN\\library\\Application\\Application.csproj": {
+              "projectPath": "D:\\MODSEN\\library\\Application\\Application.csproj"
             },
-            "D:\\MODSEN\\Library\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\MODSEN\\Library\\Infrastructure\\Infrastructure.csproj"
+            "D:\\MODSEN\\library\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\MODSEN\\library\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }

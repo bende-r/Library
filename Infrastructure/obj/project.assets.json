@@ -51,9 +51,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MODSEN\\Library\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\MODSEN\\library\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "D:\\MODSEN\\Library\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "D:\\MODSEN\\library\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\br242\\.nuget\\packages\\",
       "outputPath": "D:\\MODSEN\\Library\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
@@ -73,11 +73,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\MODSEN\\Library\\Application\\Application.csproj": {
-              "projectPath": "D:\\MODSEN\\Library\\Application\\Application.csproj"
+            "D:\\MODSEN\\library\\Application\\Application.csproj": {
+              "projectPath": "D:\\MODSEN\\library\\Application\\Application.csproj"
             },
-            "D:\\MODSEN\\Library\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\MODSEN\\Library\\Domain\\Domain.csproj"
+            "D:\\MODSEN\\library\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\MODSEN\\library\\Domain\\Domain.csproj"
             }
           }
         }
