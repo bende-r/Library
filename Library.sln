@@ -13,11 +13,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{321AAC6A-917E-4FE7-89DB-838CF7970E8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{18E868A1-ABD2-4898-AF50-9CBC3AFCE9E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{18E868A1-ABD2-4898-AF50-9CBC3AFCE9E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{852980C6-5860-4574-98DE-B3533857A65C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{852980C6-5860-4574-98DE-B3533857A65C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web", "web\", "{8C199C9D-2DCB-473F-9207-0227C9280EAF}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_2564"
+		Debug.AspNetCompiler.PhysicalPath = "web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2564\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_2564"
+		Release.AspNetCompiler.PhysicalPath = "web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2564\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2564"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +69,10 @@ Global
 		{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C199C9D-2DCB-473F-9207-0227C9280EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C199C9D-2DCB-473F-9207-0227C9280EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C199C9D-2DCB-473F-9207-0227C9280EAF}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C199C9D-2DCB-473F-9207-0227C9280EAF}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +84,7 @@ Global
 		{18E868A1-ABD2-4898-AF50-9CBC3AFCE9E6} = {4F8E97CF-FF81-4966-959C-78C70CC43253}
 		{852980C6-5860-4574-98DE-B3533857A65C} = {321AAC6A-917E-4FE7-89DB-838CF7970E8B}
 		{10CCB5EB-2CA7-410B-AAE7-5F25ECC22B38} = {321AAC6A-917E-4FE7-89DB-838CF7970E8B}
+		{8C199C9D-2DCB-473F-9207-0227C9280EAF} = {4F8E97CF-FF81-4966-959C-78C70CC43253}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B259BEC-9621-4249-97C4-376DE5A8FF80}

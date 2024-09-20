@@ -1,12 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+
+using Domain.Entities;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    internal class ApplicationDbContext
+    // Infrastructure/Data/ApplicationDbContext.cs
+    public class ApplicationDbContext : DbContext
     {
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Связь один ко многим: Один автор - много книг
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Author)
+                .WithMany(a => a.Books)
+                .HasForeignKey(b => b.AuthorId);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
