@@ -6,6 +6,8 @@ using Infrastructure.Data;
 using Application.Mappings;
 using Application.Interfaces;
 using Application.Services;
+using Domain.Interfaces;
+using Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // 2. Добавление DbContext с использованием Entity Framework Core
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 // 3. Настройка аутентификации с JWT
 builder.Services.AddAuthentication(options =>
@@ -38,10 +39,13 @@ builder.Services.AddAuthentication(options =>
 
 // 4. Добавление политики авторизации
 builder.Services.AddAuthorization();
+builder.Services.AddAuthentication();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // 5. Добавление контроллеров
 builder.Services.AddControllers();
@@ -76,8 +80,16 @@ app.UseExceptionHandler("/error");
 // 10. Включение CORS
 app.UseCors("AllowAll");
 
-// 11. Аутентификация и авторизация
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+// Добавляем поддержку маршрутизации
+app.UseRouting();  // Должно быть ДО UseEndpoints
+
+// Добавляем аутентификацию (если используется)
 app.UseAuthentication();
+
+// Добавляем авторизацию
 app.UseAuthorization();
 
 // 12. Маршрутизация для контроллеров

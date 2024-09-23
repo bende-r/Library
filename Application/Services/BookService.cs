@@ -27,6 +27,21 @@ namespace Application.Services
             return _mapper.Map<IEnumerable<BookDto>>(books);
         }
 
+        public async Task<PagedResult<BookDto>> GetAllBooksAsync(int page, int pageSize)
+        {
+            var books = await _unitOfWork.Books.GetAllPaginatedAsync(page, pageSize);
+            var totalBooks = await _unitOfWork.Books.GetTotalCountAsync();
+
+            return new PagedResult<BookDto>
+            {
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalItems = totalBooks,
+                TotalPages = (int)Math.Ceiling((double)totalBooks / pageSize),
+                Items = _mapper.Map<IEnumerable<BookDto>>(books)
+            };
+        }
+
         public async Task<BookDto> GetBookByIdAsync(int id)
         {
             var book = await _unitOfWork.Books.GetByIdAsync(id);

@@ -12,6 +12,9 @@ namespace Application.Interfaces
         /// </summary>
         Task<IEnumerable<BookDto>> GetAllBooksAsync();
 
+        Task<PagedResult<BookDto>> GetAllBooksAsync(int page, int pageSize);
+
+
         /// <summary>
         /// Получение книги по идентификатору.
         /// </summary>

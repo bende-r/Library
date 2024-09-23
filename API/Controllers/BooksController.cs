@@ -17,6 +17,14 @@ namespace API.Controllers
             _bookService = bookService;
         }
 
+        // Пагинированный запрос всех книг с параметрами page и pageSize
+        [HttpGet]
+        public async Task<ActionResult<PagedResult<BookDto>>> GetAllBooks(int page = 1, int pageSize = 10)
+        {
+            var pagedBooks = await _bookService.GetAllBooksAsync(page, pageSize);
+            return Ok(pagedBooks);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookDto>>> GetAllBooks()
         {
@@ -47,7 +55,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult<BookDto>> CreateBook(BookDto bookDto)
         {
             var createdBook = await _bookService.AddBookAsync(bookDto);
@@ -55,7 +63,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+     //   [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBook(int id, BookDto bookDto)
         {
             if (id != bookDto.Id)
@@ -68,7 +76,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             await _bookService.DeleteBookAsync(id);

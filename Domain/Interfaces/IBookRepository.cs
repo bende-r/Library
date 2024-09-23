@@ -6,6 +6,11 @@ namespace Domain.Interfaces
     {
         Task<IEnumerable<Book>> GetAllAsync();
 
+        Task<IEnumerable<Book>> GetAllPaginatedAsync(int page, int pageSize);
+
+        Task<int> GetTotalCountAsync();
+      
+
         Task<Book> GetByIdAsync(int id);
 
         Task<Book> GetByISBNAsync(string isbn);

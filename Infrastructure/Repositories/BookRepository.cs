@@ -19,6 +19,20 @@ namespace Infrastructure.Repositories
             return await _context.Books.Include(b => b.Author).ToListAsync();
         }
 
+        public async Task<IEnumerable<Book>> GetAllPaginatedAsync(int page, int pageSize)
+        {
+            return await _context.Books
+                .Include(b => b.Author)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            return await _context.Books.CountAsync();
+        }
+
         public async Task<Book> GetByIdAsync(int id)
         {
             return await _context.Books

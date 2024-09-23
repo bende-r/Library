@@ -1,6 +1,6 @@
 ﻿namespace Application.Validators
 {
-    internal class  
+    internal class  AuthorValidator
     {
     }
 }
