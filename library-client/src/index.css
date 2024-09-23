@@ -11,3 +11,86 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.header ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.header ul li {
+  margin-right: 20px;
+}
+
+.header ul li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.header ul li a:hover {
+  text-decoration: underline;
+}
+
+.auth-links a {
+  margin-left: 10px;
+  color: #007bff;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+  border-top: 1px solid #dee2e6;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  border: 1px solid #dee2e6;
+  padding: 5px 10px;
+  color: #007bff;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.page-link:hover {
+  background-color: #f8f9fa;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+}

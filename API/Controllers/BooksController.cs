@@ -25,12 +25,12 @@ namespace API.Controllers
             return Ok(pagedBooks);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<BookDto>>> GetAllBooks()
-        {
-            var books = await _bookService.GetAllBooksAsync();
-            return Ok(books);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<BookDto>>> GetAllBooks()
+        //{
+        //    var books = await _bookService.GetAllBooksAsync();
+        //    return Ok(books);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<BookDto>> GetBook(int id)

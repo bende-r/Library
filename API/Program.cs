@@ -62,15 +62,27 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 7. Настройка CORS (если нужно)
+//// 7. Настройка CORS (если нужно)
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll", builder =>
+//    {
+//        builder.AllowAnyOrigin()
+//               .AllowAnyMethod()
+//               .AllowAnyHeader();
+//    });
+//});
+
+// Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
 });
 
 var app = builder.Build();
@@ -93,7 +105,7 @@ app.UseStaticFiles();
 // Добавляем поддержку маршрутизации
 app.UseRouting();  // Должно быть ДО UseEndpoints
 
-
+app.UseCors("AllowSpecificOrigin");
 
 // Добавляем аутентификацию (если используется)
 app.UseAuthentication();
