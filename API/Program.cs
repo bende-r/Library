@@ -8,6 +8,10 @@ using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using API;
+using Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,25 +21,21 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // 2. Добавление DbContext с использованием Entity Framework Core
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
-// 3. Настройка аутентификации с JWT
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
-    };
-}); 
+//// 3. Настройка аутентификации с JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+          .AddJwtBearer(options =>
+          {
+              options.TokenValidationParameters = new TokenValidationParameters
+              {
+                  ValidateIssuer = true,
+                  ValidateAudience = true,
+                  ValidateLifetime = true,
+                  ValidateIssuerSigningKey = true,
+                  ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                  ValidAudience = builder.Configuration["Jwt:Audience"],
+                  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+              };
+          });
 
 // 4. Добавление политики авторизации
 builder.Services.AddAuthorization();
@@ -45,6 +45,14 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // 5. Добавление контроллеров
@@ -77,14 +85,15 @@ if (app.Environment.IsDevelopment())
 // 9. Использование глобальной обработки ошибок (middleware)
 app.UseExceptionHandler("/error");
 
-// 10. Включение CORS
-app.UseCors("AllowAll");
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 // Добавляем поддержку маршрутизации
 app.UseRouting();  // Должно быть ДО UseEndpoints
+
+
 
 // Добавляем аутентификацию (если используется)
 app.UseAuthentication();
