@@ -1,5 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Application.UseCases.BooksUseCases.AddBook;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,84 +13,61 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
-        private readonly IBookService _bookService;
+        private readonly IMediator _mediator;
 
-        public BooksController(IBookService bookService)
+        public BooksController(IMediator mediator)
         {
-            _bookService = bookService;
+            _mediator = mediator;
         }
 
-        // Пагинированный запрос всех книг с параметрами page и pageSize
+        // Получить все книги
         [HttpGet]
-        public async Task<ActionResult<PagedResult<BookDto>>> GetAllBooks(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAllBooks(CancellationToken cancellationToken)
         {
-            var pagedBooks = await _bookService.GetAllBooksAsync(page, pageSize);
-            return Ok(pagedBooks);
+            var query = new GetAllBooksQuery();
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<BookDto>>> GetAllBooks()
-        //{
-        //    var books = await _bookService.GetAllBooksAsync();
-        //    return Ok(books);
-        //}
-
+        // Получить книгу по ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<BookDto>> GetBook(int id)
+        public async Task<IActionResult> GetBookById(Guid id, CancellationToken cancellationToken)
         {
-            var book = await _bookService.GetBookByIdAsync(id);
-            if (book == null)
+            var query = new GetBookByIdQuery(id);
+            var result = await _mediator.Send(query, cancellationToken);
+
+            if (result == null)
             {
                 return NotFound();
             }
-            return Ok(book);
+
+            return Ok(result);
         }
 
-        [HttpGet("isbn/{isbn}")]
-        public async Task<ActionResult<BookDto>> GetBookByISBN(string isbn)
-        {
-            var book = await _bookService.GetBookByISBNAsync(isbn);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return Ok(book);
-        }
-
+        // Создать книгу
         [HttpPost]
-      //  [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<BookDto>> CreateBook(BookDto bookDto)
+        public async Task<IActionResult> AddBook([FromBody] AddBookCommand command, CancellationToken cancellationToken)
         {
-            var createdBook = await _bookService.AddBookAsync(bookDto);
-            return CreatedAtAction(nameof(GetBook), new { id = createdBook.Id }, createdBook);
+            var result = await _mediator.Send(command, cancellationToken);
+            return CreatedAtAction(nameof(GetBookById), new { id = result.Id }, result);
         }
 
+        // Обновить книгу
         [HttpPut("{id}")]
-     //   [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateBook(int id, BookDto bookDto)
+        public async Task<IActionResult> UpdateBook(Guid id, [FromBody] UpdateBookCommand command, CancellationToken cancellationToken)
         {
-            if (id != bookDto.Id)
-            {
-                return BadRequest();
-            }
-
-            await _bookService.UpdateBookAsync(bookDto);
-            return NoContent();
+            command.Id = id;
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(result);
         }
 
+        // Удалить книгу
         [HttpDelete("{id}")]
-      //  [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteBook(int id)
+        public async Task<IActionResult> DeleteBook(Guid id, CancellationToken cancellationToken)
         {
-            await _bookService.DeleteBookAsync(id);
+            var command = new DeleteBookCommand(id);
+            await _mediator.Send(command, cancellationToken);
             return NoContent();
-        }
-
-        [HttpGet("author/{authorId}")]
-        public async Task<ActionResult<IEnumerable<BookDto>>> GetBooksByAuthor(int authorId)
-        {
-            var books = await _bookService.GetBooksByAuthorIdAsync(authorId);
-            return Ok(books);
         }
     }
 }

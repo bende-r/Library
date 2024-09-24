@@ -5,73 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : Repository<Book>, IBookRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public BookRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<IEnumerable<Book>> GetAllAsync()
-        {
-            return await _context.Books.Include(b => b.Author).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Book>> GetAllPaginatedAsync(int page, int pageSize)
-        {
-            return await _context.Books
-                .Include(b => b.Author)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-        }
-
-        public async Task<int> GetTotalCountAsync()
-        {
-            return await _context.Books.CountAsync();
-        }
-
-        public async Task<Book> GetByIdAsync(int id)
-        {
-            return await _context.Books
-                .Include(b => b.Author)
-                .FirstOrDefaultAsync(b => b.Id == id);
-        }
+        public BookRepository(ApplicationDbContext context) : base(context) { }
 
         public async Task<Book> GetByISBNAsync(string isbn)
         {
-            return await _context.Books
-                .Include(b => b.Author)
-                .FirstOrDefaultAsync(b => b.ISBN == isbn);
+            return await _dbSet.FirstOrDefaultAsync(b => b.ISBN == isbn);
         }
 
-        public async Task AddAsync(Book book)
+        public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(Guid authorId)
         {
-            await _context.Books.AddAsync(book);
-        }
-
-        public async Task UpdateAsync(Book book)
-        {
-            _context.Entry(book).State = EntityState.Modified;
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var book = await _context.Books.FindAsync(id);
-            if (book != null)
-            {
-                _context.Books.Remove(book);
-            }
-        }
-
-        public async Task<IEnumerable<Book>> GetByAuthorIdAsync(int authorId)
-        {
-            return await _context.Books
-                .Where(b => b.AuthorId == authorId)
-                .Include(b => b.Author)
-                .ToListAsync();
+            return await _dbSet.Where(b => b.AuthorId == authorId).ToListAsync();
         }
     }
 }

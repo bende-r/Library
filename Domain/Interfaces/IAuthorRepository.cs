@@ -2,16 +2,9 @@
 
 namespace Domain.Interfaces
 {
-    public interface IAuthorRepository
+    public interface IAuthorRepository : IRepository<Author>
     {
-        Task<IEnumerable<Author>> GetAllAsync();
-
-        Task<Author> GetByIdAsync(int id);
-
-        Task AddAsync(Author author);
-
-        Task UpdateAsync(Author author);
-
-        Task DeleteAsync(int id);
+        Task<IEnumerable<Book>> GetBooksByAuthorIdAsync(Guid authorId);
     }
+
 }

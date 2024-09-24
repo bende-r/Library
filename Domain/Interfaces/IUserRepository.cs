@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 using Domain.Entities;
 
+using Microsoft.AspNetCore.Identity;
+
 namespace Domain.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<ApplicationUser>
     {
-        Task<User> GetByUsernameAsync(string username);
-        Task<User> CreateAsync(User user);
+        Task<ApplicationUser?> GetByEmailAsync(string email, CancellationToken cancellationToken);
+        Task<IdentityResult> RegisterAsync(ApplicationUser user, string password);
+        Task<ApplicationUser?> GetByNameAsync(string name, CancellationToken cancellationToken);
+        Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
+        Task<IList<string>> GetRolesAsync(ApplicationUser user);
+        Task<bool> RoleExistsAsync(string roleName);
+        Task<IdentityResult> CreateRoleAsync(string roleName);
+        Task AddToRoleAsync(ApplicationUser user, string roleName);
+        Task<ApplicationUser?> GetByRefreshTokenAsync(string token, CancellationToken cancellationToken);
     }
 }

@@ -21,6 +21,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "Integra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{DA592062-3A25-4223-89B0-C0B8ED43A244}"
 	ProjectSection(SolutionItems) = preProject
+		Infrastructure\Migrations\20240920092109_InitialCreate.cs = Infrastructure\Migrations\20240920092109_InitialCreate.cs
+		Infrastructure\Migrations\20240920092109_InitialCreate.Designer.cs = Infrastructure\Migrations\20240920092109_InitialCreate.Designer.cs
+		Infrastructure\Migrations\20240923203938_IdentityMigr.cs = Infrastructure\Migrations\20240923203938_IdentityMigr.cs
+		Infrastructure\Migrations\20240923203938_IdentityMigr.Designer.cs = Infrastructure\Migrations\20240923203938_IdentityMigr.Designer.cs
+		Infrastructure\Migrations\20240924221637_ChangeAllToHandlers.cs = Infrastructure\Migrations\20240924221637_ChangeAllToHandlers.cs
+		Infrastructure\Migrations\20240924221637_ChangeAllToHandlers.Designer.cs = Infrastructure\Migrations\20240924221637_ChangeAllToHandlers.Designer.cs
+		Infrastructure\Migrations\20240924221901_ChangeAllToHandler.cs = Infrastructure\Migrations\20240924221901_ChangeAllToHandler.cs
+		Infrastructure\Migrations\20240924221901_ChangeAllToHandler.Designer.cs = Infrastructure\Migrations\20240924221901_ChangeAllToHandler.Designer.cs
+		Infrastructure\Migrations\ApplicationDbContextModelSnapshot.cs = Infrastructure\Migrations\ApplicationDbContextModelSnapshot.cs
 		comand.txt = comand.txt
 	EndProjectSection
 EndProject

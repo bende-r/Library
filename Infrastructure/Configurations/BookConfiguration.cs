@@ -9,16 +9,34 @@ namespace Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Book> builder)
         {
             builder.HasKey(b => b.Id);
-            builder.Property(b => b.ISBN).IsRequired().HasMaxLength(13);
-            builder.Property(b => b.Title).IsRequired().HasMaxLength(200);
-            builder.Property(b => b.Genre).HasMaxLength(100);
-            builder.Property(b => b.Description).HasMaxLength(1000);
 
-            // Foreign key relation with Author
+            // ISBN должно быть уникальным
+            builder.HasIndex(b => b.ISBN).IsUnique();
+
+            builder.Property(b => b.Title)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            builder.Property(b => b.Genre)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(b => b.Description)
+                .HasMaxLength(500);
+
+            builder.Property(b => b.AuthorId)
+                .IsRequired();
+
+            // Отношение один ко многим с Author
             builder.HasOne(b => b.Author)
                 .WithMany(a => a.Books)
                 .HasForeignKey(b => b.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade); // Удаление книги при удалении автора
+
+            // Отношение с UserBook (многие ко многим через промежуточную сущность)
+            builder.HasMany(b => b.UserBooks)
+                .WithOne(ub => ub.Book)
+                .HasForeignKey(ub => ub.BookId);
         }
     }
-}
+    }

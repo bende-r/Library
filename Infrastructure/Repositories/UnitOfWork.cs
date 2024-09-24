@@ -8,17 +8,19 @@ namespace Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _context;
 
+        public IBookRepository Books { get; private set; }
+        public IAuthorRepository Authors { get; private set; }
+        public IUserBookRepository UserBooks { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Books = new BookRepository(_context);
             Authors = new AuthorRepository(_context);
+            UserBooks = new UserBookRepository(_context);
         }
 
-        public IBookRepository Books { get; private set; }
-        public IAuthorRepository Authors { get; private set; }
-
-        public async Task<int> SaveChangesAsync()
+        public async Task<int> CompleteAsync()
         {
             return await _context.SaveChangesAsync();
         }
@@ -28,4 +30,5 @@ namespace Infrastructure.Repositories
             _context.Dispose();
         }
     }
+
 }

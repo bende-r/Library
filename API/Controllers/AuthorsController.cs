@@ -1,5 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Application.UseCases.AuthorsUseCases.AddAuthor;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,54 +12,60 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class AuthorsController : ControllerBase
     {
-        private readonly IAuthorService _authorService;
+        private readonly IMediator _mediator;
 
-        public AuthorsController(IAuthorService authorService)
+        public AuthorsController(IMediator mediator)
         {
-            _authorService = authorService;
+            _mediator = mediator;
         }
 
+        // Получить всех авторов
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AuthorDto>>> GetAllAuthors()
+        public async Task<IActionResult> GetAllAuthors(CancellationToken cancellationToken)
         {
-            var authors = await _authorService.GetAllAuthorsAsync();
-            return Ok(authors);
+            var query = new GetAllAuthorsQuery();
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
 
+        // Получить автора по ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<AuthorDto>> GetAuthor(int id)
+        public async Task<IActionResult> GetAuthorById(Guid id, CancellationToken cancellationToken)
         {
-            var author = await _authorService.GetAuthorByIdAsync(id);
-            if (author == null)
+            var query = new GetAuthorByIdQuery(id);
+            var result = await _mediator.Send(query, cancellationToken);
+
+            if (result == null)
             {
                 return NotFound();
             }
-            return Ok(author);
+
+            return Ok(result);
         }
 
+        // Создать автора
         [HttpPost]
-        public async Task<ActionResult<AuthorDto>> CreateAuthor([FromBody] AuthorDto authorDto)
+        public async Task<IActionResult> AddAuthor([FromBody] AddAuthorCommand command, CancellationToken cancellationToken)
         {
-            var createdAuthor = await _authorService.AddAuthorAsync(authorDto);
-            return CreatedAtAction(nameof(GetAuthor), new { id = createdAuthor.Id }, createdAuthor);
+            var result = await _mediator.Send(command, cancellationToken);
+            return CreatedAtAction(nameof(GetAuthorById), new { id = result.Id }, result);
         }
 
+        // Обновить автора
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAuthor(int id, [FromBody] AuthorDto authorDto)
+        public async Task<IActionResult> UpdateAuthor(Guid id, [FromBody] UpdateAuthorCommand command, CancellationToken cancellationToken)
         {
-            if (id != authorDto.Id)
-            {
-                return BadRequest();
-            }
-
-            await _authorService.UpdateAuthorAsync(authorDto);
-            return NoContent();
+            command.Id = id;
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(result);
         }
 
+        // Удалить автора
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAuthor(int id)
+        public async Task<IActionResult> DeleteAuthor(Guid id, CancellationToken cancellationToken)
         {
-            await _authorService.DeleteAuthorAsync(id);
+            var command = new DeleteAuthorCommand(id);
+            await _mediator.Send(command, cancellationToken);
             return NoContent();
         }
     }

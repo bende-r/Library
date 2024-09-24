@@ -1,13 +1,14 @@
-﻿namespace Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+namespace Domain.Entities;
+public class Author
 {
-    public class Author
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public string Country { get; set; }
+    public Guid Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string Country { get; set; }
 
-        public ICollection<Book> Books { get; set; }
-    }
+    // Список книг, написанных этим автором
+    public ICollection<Book> Books { get; set; }
 }
