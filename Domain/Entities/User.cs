@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNet.Identity.EntityFramework;
 
+
+
 namespace Domain.Entities
 {
-    public class User 
+    public class User :IdentityUser
     {
         public int Id { get; set; }
         public string Username { get; set; }
