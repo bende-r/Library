@@ -2,7 +2,7 @@ using System;
 namespace Domain.Entities;
 public class UserBook
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     // —сылка на книгу
     public Guid BookId { get; set; }

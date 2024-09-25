@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace Domain.Interfaces
     public interface IUserBookRepository : IRepository<UserBook>
     {
         Task<IEnumerable<UserBook>> GetBooksTakenByUserAsync(string userId);
+        Task<UserBook?> FindAsync(Expression<Func<UserBook, bool>> predicate, CancellationToken cancellationToken);
     }
 
 }

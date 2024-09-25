@@ -70,5 +70,11 @@ namespace Infrastructure.Repositories
         {
             await _userManager.AddToRoleAsync(user, roleName);
         }
+
+        public async Task<ApplicationUser?> GetByIdAsync(string userId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.Users.FindAsync(new object[] { userId }, cancellationToken);
+        }
+
     }
 }

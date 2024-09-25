@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 using Application.UseCases.AuthorsUseCases.AddAuthor;
 using Application.UseCases.AuthorsUseCases;
-using AutoMapper;
 using Domain.Entities;
+using AutoMapper;
 
-namespace Application.Mappings
+namespace Application.UseCases.BooksUseCases.AddBook
 {
-    public class AuthorMappingProfile : Profile
+    public class AddBookMapper: Profile
     {
-        public AuthorMappingProfile()
-        {
-            CreateMap<Author, AuthorResponse>();
-            CreateMap<UpdateAuthorCommand, Author>();
+        public AddBookMapper() {
+
+            CreateMap<Book, AddBookResponse>();
+            CreateMap<AddBookCommand, Book>();
         }
     }
 }

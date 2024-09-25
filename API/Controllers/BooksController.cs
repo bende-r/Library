@@ -1,6 +1,9 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
 using Application.UseCases.BooksUseCases.AddBook;
+using Application.UseCases.BooksUseCases.GetBooksByAuthor;
+using Application.UseCases.UsersBooksUseCases.BorrowBook;
+using Application.UseCases.UsersBooksUseCases.ReturnBook;
 
 using MediatR;
 
@@ -20,12 +23,18 @@ namespace API.Controllers
             _mediator = mediator;
         }
 
-        // Получить все книги
-        [HttpGet]
-        public async Task<IActionResult> GetAllBooks(CancellationToken cancellationToken)
+        //// Получить все книги
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllBooks(CancellationToken cancellationToken)
+        //{
+        //    var query = new GetAllBooksQuery();
+        //    var result = await _mediator.Send(query, cancellationToken);
+        //    return Ok(result);
+        //}
+        [HttpGet("books")]
+        public async Task<IActionResult> GetAllBooksAsync(CancellationToken cancellationToken, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllBooksQuery();
-            var result = await _mediator.Send(query, cancellationToken);
+            var result = await _mediator.Send(new GetAllBooksQuery(page, pageSize), cancellationToken);
             return Ok(result);
         }
 
@@ -69,5 +78,35 @@ namespace API.Controllers
             await _mediator.Send(command, cancellationToken);
             return NoContent();
         }
+
+        [HttpGet("isbn/{isbn}")]
+        public async Task<IActionResult> GetBookByIsbn(string isbn, CancellationToken cancellationToken)
+        {
+            var query = new GetBookByIsbnQuery(isbn);
+            var book = await _mediator.Send(query, cancellationToken);
+            return Ok(book);
+        }
+
+        [HttpGet("author/{authorId}")]
+        public async Task<IActionResult> GetBooksByAuthor(Guid authorId, CancellationToken cancellationToken)
+        {
+            var query = new GetBooksByAuthorQuery(authorId);
+            var books = await _mediator.Send(query, cancellationToken);
+            return Ok(books);
+        }
+
+        [HttpPost("borrow")]
+        public async Task<IActionResult> BorrowBook([FromBody] BorrowBookCommand command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command, cancellationToken);
+            return Ok("Book borrowed successfully");
+        }
+        [HttpPost("return")]
+        public async Task<IActionResult> ReturnBook([FromBody] ReturnBookCommand command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(command, cancellationToken);
+            return Ok("Book returned successfully");
+        }
+
     }
 }

@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Application.UseCases.AuthorsUseCases.AddAuthor
 {
-    public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, AuthorResponse>
+    public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, AddAuthorResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
             _mapper = mapper;
         }
 
-        public async Task<AuthorResponse> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
+        public async Task<AddAuthorResponse> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
         {
             var author = await _unitOfWork.Authors.GetByIdAsync(request.Id);
 
@@ -30,7 +30,7 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
                 throw new Exception("Author not found");
             }
 
-            return _mapper.Map<AuthorResponse>(author);
+            return _mapper.Map<AddAuthorResponse>(author);
         }
     }
 }

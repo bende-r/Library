@@ -21,5 +21,7 @@ namespace Domain.Interfaces
         Task<IdentityResult> CreateRoleAsync(string roleName);
         Task AddToRoleAsync(ApplicationUser user, string roleName);
         Task<ApplicationUser?> GetByRefreshTokenAsync(string token, CancellationToken cancellationToken);
+
+       Task<ApplicationUser?> GetByIdAsync(string id, CancellationToken cancellationToken);
     }
 }

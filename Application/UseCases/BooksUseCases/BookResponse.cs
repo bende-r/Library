@@ -14,5 +14,6 @@ namespace Application.UseCases.BooksUseCases
         public string Genre { get; set; }
         public string Description { get; set; }
         public string AuthorName { get; set; }
+        public bool IsBorrowed { get; set; }
     }
 }

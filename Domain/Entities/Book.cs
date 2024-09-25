@@ -15,8 +15,10 @@ public class Book
     public Guid AuthorId { get; set; }
     public Author Author { get; set; }
 
+    public bool IsBorrowed { get; set; } 
+
     // Путь к изображению книги
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
 
     // Список книг, взятых пользователями
     public ICollection<UserBook> UserBooks { get; set; }

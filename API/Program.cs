@@ -18,6 +18,7 @@ using MediatR;
 using System.Reflection;
 using Application.Behavior;
 using Application;
+using Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,24 +34,24 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 ////// 3. Настройка аутентификации с JWT
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//          .AddJwtBearer(options =>
-//          {
-//              options.TokenValidationParameters = new TokenValidationParameters
-//              {
-//                  ValidateIssuer = true,
-//                  ValidateAudience = true,
-//                  ValidateLifetime = true,
-//                  ValidateIssuerSigningKey = true,
-//                  ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//                  ValidAudience = builder.Configuration["Jwt:Audience"],
-//                  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-//              };
-//          });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+          .AddJwtBearer(options =>
+          {
+              options.TokenValidationParameters = new TokenValidationParameters
+              {
+                  ValidateIssuer = true,
+                  ValidateAudience = true,
+                  ValidateLifetime = true,
+                  ValidateIssuerSigningKey = true,
+                  ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                  ValidAudience = builder.Configuration["Jwt:Audience"],
+                  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+              };
+          });
 
-//// 4. Добавление политики авторизации
-//builder.Services.AddAuthorization();
-//builder.Services.AddAuthentication();
+// 4. Добавление политики авторизации
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication();
 
 builder.Services.ConfigureApplicationServices();
 
@@ -61,6 +62,9 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
 
 // 5. Добавление контроллеров
 builder.Services.AddControllers();

@@ -18,5 +18,11 @@ namespace Infrastructure.Repositories
         {
             return await _dbSet.Where(b => b.AuthorId == authorId).ToListAsync();
         }
+
+        public IQueryable<Book> FindAll()
+        {
+            return _dbSet.AsQueryable();
+        }
+
     }
 }

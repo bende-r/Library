@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,11 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<UserBook>> GetBooksTakenByUserAsync(string userId)
         {
             return await _dbSet.Where(ub => ub.UserId == userId).ToListAsync();
+        }
+
+        public async Task<UserBook?> FindAsync(Expression<Func<UserBook, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
         }
     }
 

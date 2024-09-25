@@ -24,6 +24,8 @@ namespace Application.UseCases.BooksUseCases.AddBook
         public async Task<AddBookResponse> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
             var book = _mapper.Map<Book>(request);
+            book.IsBorrowed = false; // New book is not borrowed by default
+
             await _unitOfWork.Books.AddAsync(book);
             await _unitOfWork.CompleteAsync();
 

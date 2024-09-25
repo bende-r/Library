@@ -13,8 +13,6 @@ namespace Application.Mappings
         {
             CreateMap<Book, BookResponse>()
                 .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author.FirstName + " " + src.Author.LastName));
-            CreateMap<AddBookCommand, Book>();
-            CreateMap<UpdateBookCommand, Book>();
         }
     }
 }

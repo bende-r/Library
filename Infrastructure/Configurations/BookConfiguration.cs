@@ -27,6 +27,10 @@ namespace Infrastructure.Configurations
             builder.Property(b => b.AuthorId)
                 .IsRequired();
 
+            builder.Property(b => b.ImageUrl)
+         .IsRequired(false);
+
+            builder.Property(b =>b.IsBorrowed).IsRequired();
             // Отношение один ко многим с Author
             builder.HasOne(b => b.Author)
                 .WithMany(a => a.Books)
@@ -39,4 +43,4 @@ namespace Infrastructure.Configurations
                 .HasForeignKey(ub => ub.BookId);
         }
     }
-    }
+}
