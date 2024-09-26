@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using MediatR;
 
-namespace Application.UseCases.UserUseCases.CreateRole
+namespace Application.UseCases.AuthUseCases.CreateRole;
+
+public sealed record CreateRoleRequest(string roleName): IRequest<CreateRoleResponse>
 {
-    public class CreateRoleRequest : IRequest<CreateRoleResponse>
-    {
-        public string RoleName { get; set; }
-
-        public CreateRoleRequest(string roleName)
-        {
-            RoleName = roleName;
-        }
-    }
-
 }

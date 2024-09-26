@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Domain.Entities;
@@ -17,15 +18,25 @@ namespace Infrastructure.Repositories
     {
         public UserBookRepository(ApplicationDbContext context) : base(context) { }
 
-        public async Task<IEnumerable<UserBook>> GetBooksTakenByUserAsync(string userId)
+        public async Task<IEnumerable<Book>> GetBooksTakenByUserAsync(string userId)
         {
-            return await _dbSet.Where(ub => ub.UserId == userId).ToListAsync();
+            var userEv = await _dbSet
+                .Where(eu => eu.UserId == userId)
+                .Include(eu => eu.Book)
+                .Select(eu => eu.Book
+                )
+                .ToListAsync();
+
+            return userEv;
+          
         }
 
         public async Task<UserBook?> FindAsync(Expression<Func<UserBook, bool>> predicate, CancellationToken cancellationToken)
         {
             return await _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
         }
+
+        
     }
 
 }

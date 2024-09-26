@@ -1,5 +1,7 @@
 using System.Reflection;
 using Application.Behavior;
+using Application.Interfaces;
+using Application.Services;
 using Application.UseCases.AuthorsUseCases.AddAuthor;
 using Application.UseCases.BooksUseCases.AddBook;
 
@@ -16,13 +18,13 @@ public static class DependencyInjection
     public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
     {
 
-        //     services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+             services.AddScoped<ITokenService, TokenService>();
 
         // Регистрация MediatR
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetAllAuthorsQueryHandler).Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
         // Регистрация AutoMapper
-        services.AddAutoMapper(typeof(GetAllAuthorsQueryHandler).Assembly);
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

@@ -7,6 +7,8 @@
         IUserBookRepository UserBooks { get; }
         IUserRepository Users { get; }
         Task<int> CompleteAsync();
+
+        Task Save();
     }
 
 }

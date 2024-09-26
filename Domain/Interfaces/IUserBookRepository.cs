@@ -11,7 +11,7 @@ namespace Domain.Interfaces
 {
     public interface IUserBookRepository : IRepository<UserBook>
     {
-        Task<IEnumerable<UserBook>> GetBooksTakenByUserAsync(string userId);
+        Task<IEnumerable<Book>> GetBooksTakenByUserAsync(string userId);
         Task<UserBook?> FindAsync(Expression<Func<UserBook, bool>> predicate, CancellationToken cancellationToken);
     }
 

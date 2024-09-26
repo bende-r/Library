@@ -2,6 +2,8 @@
 using Application.Interfaces;
 using Application.UseCases.BooksUseCases.AddBook;
 using Application.UseCases.BooksUseCases.GetBooksByAuthor;
+using Application.UseCases.BooksUseCases.GetPagedBooks;
+using Application.UseCases.EventUseCases.GetAllUserEvents;
 using Application.UseCases.UsersBooksUseCases.BorrowBook;
 using Application.UseCases.UsersBooksUseCases.ReturnBook;
 
@@ -9,6 +11,8 @@ using MediatR;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -36,6 +40,24 @@ namespace API.Controllers
         {
             var result = await _mediator.Send(new GetAllBooksQuery(page, pageSize), cancellationToken);
             return Ok(result);
+        }
+
+        [HttpPost("getPagedBooks")]
+        public async Task<IActionResult> GetPagedEvents([FromBody] GetPagedBooksRequest pageParams, CancellationToken cancellationToken)
+        {
+            var res = await _mediator.Send(pageParams, cancellationToken);
+            var metadata = new
+            {
+                res.books.TotalCount,
+                res.books.PageSize,
+                res.books.CurrentPage,
+                res.books.TotalPages,
+                res.books.HasNext,
+                res.books.HasPrevious
+            };
+
+            HttpContext.Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
+            return Ok(res.books);
         }
 
         // Получить книгу по ID
@@ -108,5 +130,12 @@ namespace API.Controllers
             return Ok("Book returned successfully");
         }
 
+        [HttpGet("getBooks/{id}")]
+        public async Task<IActionResult> GetAllUserBooks(string id, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new GetAllUserBooksRequest(id), cancellationToken);
+
+            return Ok(response.books);
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace Infrastructure.Repositories
             Books = new BookRepository(_applicationDbContext);
             Authors = new AuthorRepository(_applicationDbContext);
             UserBooks = new UserBookRepository(_applicationDbContext);
+            Users = new UserRepository( _applicationDbContext, _userManager, _roleManager);
         }
 
         
@@ -43,6 +44,11 @@ namespace Infrastructure.Repositories
         public async Task<int> CompleteAsync()
         {
             return await _applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task Save()
+        {
+            await _applicationDbContext.SaveChangesAsync();
         }
 
         public void Dispose()

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using MediatR;
 
-namespace Application.UseCases.UserUseCases.AssignRole
-{
-    public class AssignRoleRequest : IRequest<AssignRoleResponse>
-    {
-        public string UserId { get; set; }
-        public string RoleName { get; set; }
-    }
+namespace Application.UseCases.AuthUseCases.AssignRole;
 
+public sealed record AssignRoleRequest: IRequest<AssignRoleResponse>
+{
+    public string Email { get; set; }
+    public string Role { get; set; }
 }

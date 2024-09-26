@@ -19,124 +19,45 @@ using System.Reflection;
 using Application.Behavior;
 using Application;
 using Application.Services;
+using Infrastructure;
+using API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Подключение строки подключения из appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// 2. Добавление DbContext с использованием Entity Framework Core
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
-// Регистрация Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()  // Замените на ваш DbContext
-    .AddDefaultTokenProviders();
-
-////// 3. Настройка аутентификации с JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-          .AddJwtBearer(options =>
-          {
-              options.TokenValidationParameters = new TokenValidationParameters
-              {
-                  ValidateIssuer = true,
-                  ValidateAudience = true,
-                  ValidateLifetime = true,
-                  ValidateIssuerSigningKey = true,
-                  ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                  ValidAudience = builder.Configuration["Jwt:Audience"],
-                  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-              };
-          });
-
-// 4. Добавление политики авторизации
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
-
-builder.Services.ConfigureApplicationServices();
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-builder.Services.AddScoped<IBookRepository, BookRepository>();
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-builder.Services.AddScoped<ITokenService, TokenService>();
-
-
-// 5. Добавление контроллеров
-builder.Services.AddControllers();
-
-//// 6. Настройка Swagger для документации API
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+builder.Services.AddControllers();
 
-// 7. Настройка CORS (если нужно)
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
-
-// Add services to the container.
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:3000")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-});
-
+builder.Services.ConfigureApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.ConfigureAPI(builder.Configuration);
 var app = builder.Build();
 
-//// 8. Использование Swagger в среде разработки
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
 
-// 10. Использование Swagger
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Library API v1"));
+    app.UseSwaggerUI();
 }
 
-// 9. Использование глобальной обработки ошибок (middleware)
-app.UseExceptionHandler("/error");
+app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseHttpsRedirection();
+app.MapControllers();
 
-
-//app.UseHttpsRedirection();
-//app.UseStaticFiles();
-
-// Добавляем поддержку маршрутизации
-app.UseRouting();  // Должно быть ДО UseEndpoints
-// Добавляем аутентификацию (если используется)
 app.UseAuthentication();
-
-// Добавляем авторизацию
 app.UseAuthorization();
-app.UseCors("AllowSpecificOrigin");
+
+app.UseCors(options => options
+    .WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithExposedHeaders("X-Pagination")
+    .AllowCredentials());
 
 
-
-// 12. Маршрутизация для контроллеров
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
 
 app.Run();
