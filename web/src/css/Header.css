@@ -2,10 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #4268af;
     padding: 10px 20px;
     color: #fff;
-    position: fixed; /* Фиксированное позиционирование */
+  
     top: 0; /* Расположение вверху */
     left: 0; /* Расположение слева (по умолчанию) */
     right: 0; /* Расположение справа */

@@ -6,6 +6,6 @@
         public string Audience { get; set; } = string.Empty;
         public string Secret { get; set; } = string.Empty;
 
-        public DateTime Expires { get; set; } = DateTime.UtcNow.AddMinutes(60);
+        public DateTime Expires { get; set; } = DateTime.UtcNow.AddMinutes(100);
     }
 }

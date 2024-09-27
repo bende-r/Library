@@ -3,6 +3,7 @@ using Domain.Interfaces;
 using Domain.Models.Entities;
 
 using Infrastructure.Data;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -29,9 +30,12 @@ namespace Infrastructure.Repositories
 
         public async Task<PagedList<Book>> GetPagedBooksAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
-            return PagedList<Book>.ToPagedList(FindAll().OrderBy(e => e.Title),
-                pageNumber,
-                pageSize);
+            var booksQuery = FindAll()
+               
+                .OrderBy(e => e.Title);  // Сортируем книги по заголовку
+
+            return PagedList<Book>.ToPagedList(booksQuery, pageNumber, pageSize);
         }
+
     }
 }

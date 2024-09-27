@@ -10,14 +10,15 @@ const EditBook = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     id: "",
-    title: "",
-    description: "",
-    author: "",
     isbn: "",
+    title: "",
     genre: "",
+    description: "",
+    authorId: "", // Используем authorId вместо имени автора
+    isBorrowed: false, 
     picture: "",
-    isBorrowed: false
   });
+  const [authors, setAuthors] = useState([]); // Массив для хранения списка авторов
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -27,7 +28,17 @@ const EditBook = () => {
     setImageFile(e.target.files[0]);
   };
 
+  // Получаем список авторов при загрузке страницы
   useEffect(() => {
+    const fetchAuthors = async () => {
+      try {
+        const response = await PostService.getAllAuthors(); // Метод для получения списка авторов
+        setAuthors(response.data); // Предполагаем, что возвращается массив авторов с полем id и name
+      } catch (error) {
+        console.error("Error fetching authors:", error);
+      }
+    };
+
     const fetchBookDetails = async () => {
       try {
         await PostService.getBookById(id).then((response) => {
@@ -35,7 +46,7 @@ const EditBook = () => {
             id: response.data.id,
             title: response.data.title,
             description: response.data.description,
-            author: response.data.author,
+            authorId: response.data.authorId, // Используем authorId
             isbn: response.data.isbn,
             genre: response.data.genre,
             picture: response.data.picture,
@@ -56,7 +67,8 @@ const EditBook = () => {
       }
     };
 
-    fetchBookDetails();
+    fetchAuthors(); // Получаем авторов
+    fetchBookDetails(); // Получаем информацию о книге
   }, [id]);
 
   const handleInputChange = (e) => {
@@ -75,7 +87,7 @@ const EditBook = () => {
 
     try {
       if (imageFile != null) {
-        await PostService.uploadBookImage(formDataWithImage).then(
+        await PostService.uploadPicture(formDataWithImage).then(
           (response) => {
             PostService.updateBook({ ...formData, picture: response.data }).then(
               (response) => {
@@ -119,8 +131,13 @@ const EditBook = () => {
           <textarea className="form-control" id="description" name="description" value={formData.description} onChange={handleInputChange} required />
         </div>
         <div className="mb-3">
-          <label htmlFor="author" className="form-label">Author:</label>
-          <input type="text" className="form-control" id="author" name="author" value={formData.author} onChange={handleInputChange} required />
+          <label htmlFor="authorId" className="form-label">Author:</label>
+          <select className="form-control" id="authorId" name="authorId" value={formData.authorId} onChange={handleInputChange} required>
+            <option value="">Select Author</option>
+            {authors.map((author) => (
+              <option key={author.id} value={author.id}>{author.name}</option>
+            ))}
+          </select>
         </div>
         <div className="mb-3">
           <label htmlFor="isbn" className="form-label">ISBN:</label>

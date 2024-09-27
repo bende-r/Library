@@ -16,6 +16,10 @@ namespace Infrastructure.Configurations
         {
             builder.HasKey(ub => ub.Id);
 
+            // Указываем, что Id будет автоинкрементным
+            builder.Property(ub => ub.Id)
+                .ValueGeneratedOnAdd();
+
             builder.Property(ub => ub.BorrowedDate)
                 .IsRequired(false);
 

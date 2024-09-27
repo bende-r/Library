@@ -2,9 +2,14 @@ import React from 'react';
 import AuthService from "../services/auth.service";
 import { useNavigate, Link } from "react-router-dom";
 import '../css/Header.css'; 
+import curUser from './curUser';
 
 const Header = () => {
-  const user = AuthService.getCurrentUser();
+  const user = curUser.getCurrentUser();
+  console.log('User:', user);
+  const role = curUser.getUserRole();
+  console.log('User role:', role); 
+
   const navigate = useNavigate();
 
   const logOut = () => {
@@ -12,7 +17,8 @@ const Header = () => {
     navigate("/home");
     window.location.reload();
   };
-
+  
+  
   return (
     <header>
       <nav>
@@ -28,13 +34,13 @@ const Header = () => {
               <li>
                 <Link to="/myBooks">My Books</Link>
               </li>
-              {user.role && user.role.includes("ADMIN") && ( 
+              {role && role.includes("Admin") && ( 
                 <li>
                   <Link to="/adminPage">Admin Panel</Link>
                 </li>
               )}
               <li>
-                <span>{user.username}</span> {/* Отображение имени пользователя */}
+                <span>{user.user.email}</span> {/* Отображение имени пользователя */}
               </li>
               <li>
                 <button className="logout-button" onClick={logOut}>Logout</button>

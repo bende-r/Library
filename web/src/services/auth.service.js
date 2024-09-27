@@ -46,6 +46,8 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+
+
 const register = (formData) => {
   return axios
     .post(baseURL + API_URL + "/register", 

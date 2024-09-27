@@ -35,24 +35,32 @@ const BookDetails = () => {
     fetchBookDetails();
   }, [id]);
 
-  const handleBorrow = async (e) => {
-    e.preventDefault();
+  const handleBorrow = async () => {
     try {
-      await PostService.borrowBook(user.user.id, id).then(
-        () => {
-          alert('You borrowed the book successfully!');
-          window.location.reload();
-        },
-        (error) => {
-          if (error.response == null) {
-            handleRefresh(user, navigate);
-          } else {
-            alert(error.response.data['ErrorMessage']);
-          }
-        }
+      const currentDate = new Date(); // Дата взятия книги
+      const returnDate = new Date();
+      returnDate.setDate(currentDate.getDate() + 30); // Возврат через 30 дней
+
+      const borrowRequestBody = {
+        userId: user.user.id,               // Идентификатор пользователя
+        bookId: id,                    // Идентификатор книги
+        borrowDate: currentDate.toISOString(),  // Дата взятия книги
+        returnDate: returnDate.toISOString()   // Дата возврата книги
+      };
+
+      const response = await PostService.borrowBook(
+        borrowRequestBody.userId,
+        borrowRequestBody.bookId,
+        borrowRequestBody.borrowDate,
+        borrowRequestBody.returnDate
       );
+
+      console.log("Book borrowed successfully:", response);
+      alert('You have successfully borrowed the book');
+      navigate("/myBooks");
     } catch (error) {
       console.error("Error borrowing the book:", error);
+      alert('An error occurred while borrowing the book.');
     }
   };
 

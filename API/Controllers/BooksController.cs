@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Application.UseCases.BooksUseCases.AddBook;
 using Application.UseCases.BooksUseCases.GetBooksByAuthor;
 using Application.UseCases.BooksUseCases.GetPagedBooks;
+using Application.UseCases.BooksUseCases.UploadBookCover;
 using Application.UseCases.EventUseCases.GetAllUserEvents;
 using Application.UseCases.UsersBooksUseCases.BorrowBook;
 using Application.UseCases.UsersBooksUseCases.ReturnBook;
@@ -35,6 +36,7 @@ namespace API.Controllers
         //    var result = await _mediator.Send(query, cancellationToken);
         //    return Ok(result);
         //}
+
         [HttpGet("books")]
         public async Task<IActionResult> GetAllBooksAsync(CancellationToken cancellationToken, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
@@ -53,7 +55,8 @@ namespace API.Controllers
                 res.books.CurrentPage,
                 res.books.TotalPages,
                 res.books.HasNext,
-                res.books.HasPrevious
+                res.books.HasPrevious,
+              
             };
 
             HttpContext.Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
@@ -123,6 +126,7 @@ namespace API.Controllers
             await _mediator.Send(command, cancellationToken);
             return Ok("Book borrowed successfully");
         }
+
         [HttpPost("return")]
         public async Task<IActionResult> ReturnBook([FromBody] ReturnBookCommand command, CancellationToken cancellationToken)
         {
@@ -130,12 +134,19 @@ namespace API.Controllers
             return Ok("Book returned successfully");
         }
 
-        [HttpGet("getBooks/{id}")]
+        [HttpGet("getUserBooks/{id}")]
         public async Task<IActionResult> GetAllUserBooks(string id, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new GetAllUserBooksRequest(id), cancellationToken);
 
             return Ok(response.books);
+        }
+
+        [HttpPost("uploadPicture")]
+        public async Task<object> UploadPicture([FromForm] IFormFile file, [FromForm] string bookId, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new UploadBookCoverRequest(file, bookId), cancellationToken);
+            return Ok(response.Message);
         }
     }
 }

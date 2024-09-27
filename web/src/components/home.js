@@ -11,7 +11,7 @@ const Home = () => {
           <ul>
             {user ? (
               <>
-                <p>Hi, {user.user.name}</p>
+                <p>Hi, {user.user.email}</p>
               </>
             ) : (
               <>

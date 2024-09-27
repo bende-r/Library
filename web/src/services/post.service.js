@@ -30,7 +30,7 @@ const deleteBook = (BookId) => {
 
 const updateBook = (formData) => {
   console.log(formData);
-  return axios.put(baseURL+API_URL+"books", formData, { headers: authHeader() })
+  return axios.put(baseURL+API_URL+"books/"+formData.id, formData, { headers: authHeader() })
   .catch((error) => {
     throw error; 
   });
@@ -51,7 +51,7 @@ const getFilteredBooks = (category, place) => {
 };
 
 const uploadPicture = (formDataWithImage) => {
-  return axios.post(baseURL+API_URL+"Books/upload", formDataWithImage, { headers: authHeader() })
+  return axios.post(baseURL+API_URL+"Books/uploadPicture", formDataWithImage, { headers: authHeader() })
   .catch((error) => {
     throw error; 
   });
@@ -82,7 +82,7 @@ const unregisterFromBook = (userId, BookId) => {
 
 const getUsersBooks = (userId) => {
   return axios
-    .get(baseURL + API_URL + "Books/getBooks/"+userId, { headers: authHeader() })
+    .get(baseURL + API_URL + "Books/getUserBooks/"+userId, { headers: authHeader() })
     .then((response) => {
       
       return response;
@@ -101,7 +101,33 @@ const getPagedBooks = (pageNumber, pageSize) => {
     });
 };
 
+const getAllAuthors = () => {
+  return axios.get(baseURL+API_URL+"authors", { headers: authHeader() })
+  .catch((error) => {    
+    throw error; 
+  });
+};
 
+const borrowBook = (userId, bookId, borrowDate, returnDate)=>{
+  return axios.post(baseURL + API_URL + "books/borrow", { 
+  userId, 
+  bookId, 
+  borrowDate, 
+  returnDate 
+});};
+
+const returnBook =(userId, bookId) =>{
+  return axios.post(
+    baseURL + API_URL + "books/return",
+    {
+      userId: userId,
+      bookId: bookId
+    },
+    { headers: authHeader() } 
+  ) .catch((error) => {    
+    throw error; 
+  });
+}
 
 
 const postService = {
@@ -116,6 +142,9 @@ const postService = {
   unregisterFromBook,
   getUsersBooks,
   getPagedBooks,
+  getAllAuthors,
+  borrowBook,
+  returnBook,
 };
 
 export default postService;

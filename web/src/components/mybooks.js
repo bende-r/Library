@@ -16,7 +16,7 @@ const UserBooks = () => {
       (response) => {
         setUserBooks(response.data);
         // Добавляем alert для вывода длины массива книг
-        alert(`You have ${response.data.length} books.`);
+      //  alert(`You have ${response.data.length} books.`);
       },
       async (error) => {
         if (error.response == null) {
@@ -40,14 +40,14 @@ const UserBooks = () => {
             handleRefresh(user, navigate);
           } else {
             setErrorMessage(error.response.data['ErrorMessage']);
-          }            
+          }
         }
       );
     } catch (error) {
       console.error("Error returning book:", error);
     }
   };
-
+  
   return (
     <div>
       <div className="mt-3">
@@ -60,13 +60,20 @@ const UserBooks = () => {
                   <Link to={`/bookDetails/${book.id}`}>{book.title}</Link>
                 </div>
                 <img
-                  src={`/images/${book.coverImage}`}
+                  src={`/images/${book.coverImage || "default.jpg"}`}
                   className="card-img-top"
                   alt={book.title}
                   style={{ objectFit: "cover", height: "300px" }}
                 />
                 <div className="card-body">
-                  <p className="card-text">{book.description}</p>
+                  <h5 className="card-title">Book Details</h5>
+                  <p><strong>Title:</strong> {book.title}</p>
+                  <p><strong>Author:</strong> {book.authorName}</p>
+                  <p><strong>ISBN:</strong> {book.isbn}</p>
+                  <p><strong>Genre:</strong> {book.genre}</p>
+                  <p><strong>Description:</strong> {book.description}</p>
+                  <p><strong>Is Borrowed:</strong> {book.isBorrowed ? 'Yes' : 'No'}</p>
+                  
                   <button
                     onClick={handleReturnBook(book.id)}
                     className="btn btn-danger"
