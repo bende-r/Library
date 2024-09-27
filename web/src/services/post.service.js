@@ -113,8 +113,14 @@ const borrowBook = (userId, bookId, borrowDate, returnDate)=>{
   userId, 
   bookId, 
   borrowDate, 
-  returnDate 
-});};
+  returnDate} , {headers: authHeader() })
+  .then((response) => {     
+    return response;
+  }).catch((error) => {
+    throw error; 
+  });
+};
+
 
 const returnBook =(userId, bookId) =>{
   return axios.post(

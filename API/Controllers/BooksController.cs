@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
@@ -79,6 +80,7 @@ namespace API.Controllers
         }
 
         // Создать книгу
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddBook([FromBody] AddBookCommand command, CancellationToken cancellationToken)
         {
@@ -87,6 +89,7 @@ namespace API.Controllers
         }
 
         // Обновить книгу
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook(Guid id, [FromBody] UpdateBookCommand command, CancellationToken cancellationToken)
         {
@@ -96,6 +99,7 @@ namespace API.Controllers
         }
 
         // Удалить книгу
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(Guid id, CancellationToken cancellationToken)
         {

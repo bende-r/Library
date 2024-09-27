@@ -5,9 +5,6 @@ import AuthService from "../services/auth.service";
 const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
-    name: '',
-    lastName: '',
-    birthDate: '',
     password: ''
   });
   const [responseMessage, setResponseMessage] = useState('');
@@ -53,18 +50,6 @@ const Register = () => {
         <h3 className="Auth-form-title">Sign Up</h3>
           <label htmlFor="email" className="form-label">Email:</label>
           <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="form-control" required />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name:</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className="form-control" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="lastName" className="form-label">Lastname:</label>
-          <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} className="form-control" required />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="birthDate" className="form-label">Date of birth:</label>
-          <input type="date" id="birthDate" name="birthDate" value={formData.birthDate} onChange={handleChange} className="form-control" required />
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Password:</label>

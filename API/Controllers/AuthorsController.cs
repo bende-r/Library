@@ -4,10 +4,12 @@ using Application.UseCases.AuthorsUseCases.AddAuthor;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthorsController : ControllerBase
@@ -44,6 +46,7 @@ namespace API.Controllers
         }
 
         // Создать автора
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddAuthor([FromBody] AddAuthorCommand command, CancellationToken cancellationToken)
         {
@@ -52,6 +55,7 @@ namespace API.Controllers
         }
 
         // Обновить автора
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAuthor(Guid id, [FromBody] UpdateAuthorCommand command, CancellationToken cancellationToken)
         {
@@ -61,6 +65,7 @@ namespace API.Controllers
         }
 
         // Удалить автора
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAuthor(Guid id, CancellationToken cancellationToken)
         {

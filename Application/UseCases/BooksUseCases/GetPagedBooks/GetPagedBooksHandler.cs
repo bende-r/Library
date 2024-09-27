@@ -17,6 +17,7 @@ public class GetPagedBooksHandler : IRequestHandler<GetPagedBooksRequest, GetPag
     public async Task<GetPagedBooksResponse> Handle(GetPagedBooksRequest request, CancellationToken cancellationToken)
     {
         var res = await _unitOfWork.Books.GetPagedBooksAsync(request.PageNumber, request.PageSize,cancellationToken);
+     
         return new GetPagedBooksResponse()
         {
             books = res,

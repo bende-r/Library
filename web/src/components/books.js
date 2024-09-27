@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostService from "../services/post.service";
-import AuthService from "../services/auth.service";
+import curUser from './curUser';
 import { useNavigate, Link } from "react-router-dom";
 import { genreOptions } from "./optionsData"; // Жанры остаются статическими
 import handleRefresh from './refresh';
@@ -17,8 +17,8 @@ const Books = () => {
   const [totalItems, setTotalItems] = useState(0);
 
   const pageSize = 5;
-
-  const user = AuthService.getCurrentUser();
+  const role = curUser.getUserRole(); // Получаем информацию о пользователе
+  const isAdmin = role && role.includes("Admin"); // Проверка роли администратора
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,15 +44,21 @@ const Books = () => {
   const getBooksWithPagination = async (page) => {
     await PostService.getPagedBooks(page, pageSize).then(
       (response) => {
-        setBooks(response.data);
-        console.log(response.data);
-        setFilteredBooks(response.data); // Изначально показываем все книги
+        let booksData = response.data;
+
+        // Фильтруем книги: если пользователь не админ, скрываем книги с isBorrowed: true
+        if (!isAdmin) {
+          booksData = booksData.filter((book) => !book.isBorrowed);
+        }
+
+        setBooks(booksData);
+        setFilteredBooks(booksData); // Изначально показываем все книги
         setTotalPages(response.headers['x-pagination'] ? JSON.parse(response.headers['x-pagination']).TotalPages : 1);
         setTotalItems(response.headers['x-pagination'] ? JSON.parse(response.headers['x-pagination']).TotalCount : 0);
       },
       (error) => {
         if (error.response == null) {
-          handleRefresh(user, navigate);
+          handleRefresh(role, navigate);
         }
       }  
     );
@@ -110,7 +116,7 @@ const Books = () => {
         <select className="form-select mb-3" value={selectedAuthor} onChange={handleAuthorChange}>
           <option value="">Select Author...</option>
           {authors.map((author) => (
-            <option key={author.id} value={author.id}>{author.firstName} {author.lastName}      {author.country}</option> // Используем id автора
+            <option key={author.id} value={author.id}>{author.firstName} {author.lastName}</option> // Используем id автора
           ))}
         </select>
         <div className="input-group mb-3">
@@ -138,11 +144,14 @@ const Books = () => {
                 />
                 <div className="card-body">
                   <p className="card-text"><strong>Title:</strong> {book.title}</p>
-                  <p className="card-text"><strong>Author:</strong> {book.author}</p>
+                  <p className="card-text"><strong>Author:</strong> {book.author.firstName} {book.author.lastName}</p>
                   <p className="card-text"><strong>ISBN:</strong> {book.isbn}</p>
                   <p className="card-text"><strong>Genre:</strong> {book.genre}</p>
                   <p className="card-text"><strong>Description:</strong> {book.description}</p>
-                  <p className="card-text"><strong>Is Borrowed:</strong> {book.isBorrowed ? "Yes" : "No"}</p>
+                  {isAdmin && ( // Показываем информацию об isBorrowed только если пользователь администратор
+                    <p className="card-text"><strong>Is Borrowed:</strong> {book.isBorrowed ? "Yes" : "No"}</p>
+                  )}
+               
                 </div>
               </div>
             </div>

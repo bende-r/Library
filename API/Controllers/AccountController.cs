@@ -17,7 +17,7 @@ using Infrastructure.Data;
 
 using MediatR;
 
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using System.IdentityModel.Tokens.Jwt;
@@ -50,6 +50,7 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("assignRole")]
         public async Task<IActionResult> AssignRoleAsync([FromBody] AssignRoleRequest model, CancellationToken cancellationToken)
         {
@@ -58,6 +59,7 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("createRole")]
         public async Task<IActionResult> CreateRoleAsync([FromBody] string roleName)
         {

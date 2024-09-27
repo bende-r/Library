@@ -33,7 +33,16 @@ namespace Infrastructure.Repositories
 
         public async Task<IdentityResult> RegisterAsync(ApplicationUser user, string password)
         {
-            return await _userManager.CreateAsync(user, password);
+            // Регистрация пользователя
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                // Назначаем роль "User" новому пользователю
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+
+            return result;
         }
 
         public async Task<ApplicationUser?> GetByNameAsync(string name, CancellationToken cancellationToken)

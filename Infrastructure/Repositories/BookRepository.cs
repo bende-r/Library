@@ -31,7 +31,7 @@ namespace Infrastructure.Repositories
         public async Task<PagedList<Book>> GetPagedBooksAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
         {
             var booksQuery = FindAll()
-               
+                .Include(b => b.Author)  // Включаем автора для каждой книги
                 .OrderBy(e => e.Title);  // Сортируем книги по заголовку
 
             return PagedList<Book>.ToPagedList(booksQuery, pageNumber, pageSize);
