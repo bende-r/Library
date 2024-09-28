@@ -1,7 +1,7 @@
 # Приложение Library
 
-Данное Web-приложение разработано для имитации библиотеки. Для работы с базой дынных используется .Net Core, с использованием EF Core. 
-Для разработки клиентской части приложения использован React. 
+Данное Web-приложение разработано для имитации библиотеки. Для работы с базой дынных используется .Net Core, с использованием EF Core.
+Для разработки клиентской части приложения использован React.
 
 ## Начало работы
 
@@ -16,7 +16,7 @@
 Клонируйте репозиторий:
 
 ```
-https://github.com/bende-r/Library.git
+git clone https://github.com/bende-r/Library.git
 ```
 
 Перейдите в репозиторий проекта
@@ -26,12 +26,6 @@ cd Library
 ```
 
 ### Выполните миграцию для создания базы данных
-
-```
-dotnet ef migrations add Initial --project Infrastructure\Infrastructure.csproj --startup-project API\API.csproj
-```
-
-Обновите базу
 
 ```
 dotnet ef database update --project Infrastructure\Infrastructure.csproj --startup-project API\API.csproj
