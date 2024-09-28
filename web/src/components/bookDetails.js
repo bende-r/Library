@@ -77,7 +77,7 @@ const BookDetails = () => {
           </div>
           <div className="card-body">
             <img
-              src={`/pictures/${bookDetails.picture}`}
+              src={`/pictures/${bookDetails.imageUrl}`}
               className="card-img-top"
               alt={bookDetails.title}
               style={{ objectFit: "cover", height: "300px", width: "300px" }}

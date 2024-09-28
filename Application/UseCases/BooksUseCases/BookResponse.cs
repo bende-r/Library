@@ -15,5 +15,7 @@ namespace Application.UseCases.BooksUseCases
         public string Description { get; set; }
         public string AuthorName { get; set; }
         public bool IsBorrowed { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }

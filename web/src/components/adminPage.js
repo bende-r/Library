@@ -73,7 +73,7 @@ const AdminPage = () => {
                     <Link to={`/bookDetails/${book.id}`}>{book.title}</Link>
                   </div>
                   <img
-                    src={`/pictures/${book.picture || "default.jpg"}`}
+                    src={`/pictures/${book.imageUrl || "default.jpg"}`}
                     className="card-img-top"
                     alt={book.title}
                     style={{ objectFit: "cover", height: "300px" }}

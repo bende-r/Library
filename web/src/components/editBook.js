@@ -16,7 +16,7 @@ const EditBook = () => {
     description: "",
     authorId: "", // Используем authorId вместо имени автора
     isBorrowed: false, 
-    picture: "",
+    imageUrl: "",
   });
   const [authors, setAuthors] = useState([]); // Массив для хранения списка авторов
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ const EditBook = () => {
             authorId: response.data.authorId, // Используем authorId
             isbn: response.data.isbn,
             genre: response.data.genre,
-            picture: response.data.picture,
+            imageUrl: response.data.imageUrl,
             isBorrowed: response.data.isBorrowed
           });
           setLoading(false);
@@ -89,7 +89,7 @@ const EditBook = () => {
       if (imageFile != null) {
         await PostService.uploadPicture(formDataWithImage).then(
           (response) => {
-            PostService.updateBook({ ...formData, picture: response.data }).then(
+            PostService.updateBook({ ...formData, imageUrl: response.data }).then(
               (response) => {
                 navigate("/books");
               },
@@ -135,7 +135,7 @@ const EditBook = () => {
           <select className="form-control" id="authorId" name="authorId" value={formData.authorId} onChange={handleInputChange} required>
             <option value="">Select Author</option>
             {authors.map((author) => (
-              <option key={author.id} value={author.id}>{author.name}</option>
+              <option key={author.id} value={author.id}>{author.firstName} {author.lastName}</option>
             ))}
           </select>
         </div>
@@ -148,8 +148,8 @@ const EditBook = () => {
           <input type="text" className="form-control" id="genre" name="genre" value={formData.genre} onChange={handleInputChange} required />
         </div>
         <div className="mb-3">
-          <label htmlFor="photo" className="form-label">Cover Image:</label>
-          <input type="file" className="form-control" id="photo" name="photo" onChange={handleImageChange} accept="image/*" />
+          <label htmlFor="imageUrl" className="form-label">Cover Image:</label>
+          <input type="file" className="form-control" id="imageUrl" name="imageUrl" onChange={handleImageChange} accept="image/*" />
         </div>
         <button type="submit" className="btn btn-primary">Update Book</button>
       </form>

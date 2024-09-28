@@ -47,10 +47,10 @@ const Books = () => {
         let booksData = response.data;
 
         // Фильтруем книги: если пользователь не админ, скрываем книги с isBorrowed: true
-        if (!isAdmin) {
-          booksData = booksData.filter((book) => !book.isBorrowed);
-        }
-
+        // if (!isAdmin) {
+        //   booksData = booksData.filter((book) => !book.isBorrowed);
+        // }
+        console.log(booksData);
         setBooks(booksData);
         setFilteredBooks(booksData); // Изначально показываем все книги
         setTotalPages(response.headers['x-pagination'] ? JSON.parse(response.headers['x-pagination']).TotalPages : 1);
@@ -137,7 +137,7 @@ const Books = () => {
                   <Link to={`/bookDetails/${book.id}`}>{book.title}</Link>
                 </div>
                 <img
-                  src={`/pictures/${book.coverImage || "default.jpg"}`}
+                  src={`/pictures/${book.imageUrl || "default.jpg"}`}
                   className="card-img-top"
                   alt={book.title}
                   style={{ objectFit: "cover", height: "300px" }}
@@ -148,9 +148,9 @@ const Books = () => {
                   <p className="card-text"><strong>ISBN:</strong> {book.isbn}</p>
                   <p className="card-text"><strong>Genre:</strong> {book.genre}</p>
                   <p className="card-text"><strong>Description:</strong> {book.description}</p>
-                  {isAdmin && ( // Показываем информацию об isBorrowed только если пользователь администратор
-                    <p className="card-text"><strong>Is Borrowed:</strong> {book.isBorrowed ? "Yes" : "No"}</p>
-                  )}
+              
+                    <p className="card-text"><strong>Is Borrowed:</strong> {book.isBorrowed ? "Not avalible" : "No"}</p>
+                 
                
                 </div>
               </div>
