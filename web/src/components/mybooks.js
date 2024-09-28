@@ -14,6 +14,7 @@ const UserBooks = () => {
   useEffect(() => {
     PostService.getUsersBooks(user.user.id).then(
       (response) => {
+        console.log(response.data);
         setUserBooks(response.data);
         // Добавляем alert для вывода длины массива книг
       //  alert(`You have ${response.data.length} books.`);
@@ -60,7 +61,7 @@ const UserBooks = () => {
                   <Link to={`/bookDetails/${book.id}`}>{book.title}</Link>
                 </div>
                 <img
-                  src={`/images/${book.coverImage || "default.jpg"}`}
+                  src={`/pictures/${book.imageUrl || "default.jpg"}`}
                   className="card-img-top"
                   alt={book.title}
                   style={{ objectFit: "cover", height: "300px" }}
