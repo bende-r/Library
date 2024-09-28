@@ -4,6 +4,7 @@ using API.Middlewares;
 using Application;
 
 using Infrastructure;
+using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,8 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddScoped<DatabaseSeeder>();
+
 var app = builder.Build();
 
 // Включение CORS политики
@@ -52,11 +55,11 @@ app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.UseCors(options => options
-//    .WithOrigins("http://localhost:3000")
-//    .AllowAnyHeader()
-//    .AllowAnyMethod()
-//    .WithExposedHeaders("X-Pagination")
-//    .AllowCredentials());
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var seeder = services.GetRequiredService<DatabaseSeeder>();
+    await seeder.SeedAsync();
+}
 
 app.Run();
