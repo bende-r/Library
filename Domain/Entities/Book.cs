@@ -1,8 +1,5 @@
-﻿using System;
+﻿namespace Domain.Entities;
 
-using Domain.Entities;
-
-namespace Domain.Entities;
 public class Book
 {
     public Guid Id { get; set; }
@@ -13,9 +10,10 @@ public class Book
 
     // Ссылка на автора книги
     public Guid AuthorId { get; set; }
+
     public Author Author { get; set; }
 
-    public bool IsBorrowed { get; set; } 
+    public bool IsBorrowed { get; set; }
 
     // Путь к изображению книги
     public string? ImageUrl { get; set; }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
 
 using Infrastructure.Data;
@@ -19,6 +13,7 @@ namespace Infrastructure.Repositories
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+
         public UserRepository(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) : base(dbContext)
         {
             _dbContext = dbContext;
@@ -84,6 +79,5 @@ namespace Infrastructure.Repositories
         {
             return await _dbContext.Users.FindAsync(new object[] { userId }, cancellationToken);
         }
-
     }
 }

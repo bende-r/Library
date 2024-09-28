@@ -2,7 +2,11 @@
 {
     public class AssignRoleException : Exception
     {
-        public AssignRoleException() { }
-        public AssignRoleException(string message) : base(message) { }
+        public AssignRoleException()
+        { }
+
+        public AssignRoleException(string message) : base(message)
+        {
+        }
     }
 }

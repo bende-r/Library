@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Application.UseCases.AuthorsUseCases;
+﻿using Application.UseCases.AuthorsUseCases;
 using Application.UseCases.AuthorsUseCases.AddAuthor;
+
 using AutoMapper;
 
 using Domain.Entities;
@@ -50,7 +45,6 @@ namespace Tests.UseCasesTest
 
             _mockUnitOfWork.Setup(uow => uow.Authors.AddAsync(It.IsAny<Author>())).Returns(Task.CompletedTask);
             _mockUnitOfWork.Setup(uow => uow.CompleteAsync()).Returns(Task.FromResult(0));
-
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);

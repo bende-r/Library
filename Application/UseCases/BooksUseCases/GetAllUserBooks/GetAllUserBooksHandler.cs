@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.UseCases.EventUseCases.GetAllUserEvents;
 
-public class GetAllUserBooksHandler: IRequestHandler<GetAllUserBooksRequest, GetAllUserBooksResponse>
+public class GetAllUserBooksHandler : IRequestHandler<GetAllUserBooksRequest, GetAllUserBooksResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,6 +12,7 @@ public class GetAllUserBooksHandler: IRequestHandler<GetAllUserBooksRequest, Get
     {
         _unitOfWork = unitOfWork;
     }
+
     public async Task<GetAllUserBooksResponse> Handle(GetAllUserBooksRequest request, CancellationToken cancellationToken)
     {
         var res = await _unitOfWork.UserBooks.GetBooksTakenByUserAsync(request.id);

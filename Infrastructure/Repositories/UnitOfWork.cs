@@ -1,11 +1,10 @@
 ﻿using Domain.Entities;
-using System;
 
 using Domain.Interfaces;
-using Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
 
-using Microsoft.EntityFrameworkCore;
+using Infrastructure.Data;
+
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Repositories
 {
@@ -28,10 +27,8 @@ namespace Infrastructure.Repositories
             Books = new BookRepository(_applicationDbContext);
             Authors = new AuthorRepository(_applicationDbContext);
             UserBooks = new UserBookRepository(_applicationDbContext);
-            Users = new UserRepository( _applicationDbContext, _userManager, _roleManager);
+            Users = new UserRepository(_applicationDbContext, _userManager, _roleManager);
         }
-
-        
 
         //public UnitOfWork(ApplicationDbContext context)
         //{
@@ -56,5 +53,4 @@ namespace Infrastructure.Repositories
             _applicationDbContext.Dispose();
         }
     }
-
 }

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.UseCases.AuthUseCases.CreateRole;
 
-public class CreateRoleHandler: IRequestHandler<CreateRoleRequest, CreateRoleResponse>
+public class CreateRoleHandler : IRequestHandler<CreateRoleRequest, CreateRoleResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,6 +14,7 @@ public class CreateRoleHandler: IRequestHandler<CreateRoleRequest, CreateRoleRes
     {
         _unitOfWork = unitOfWork;
     }
+
     public async Task<CreateRoleResponse> Handle(CreateRoleRequest request, CancellationToken cancellationToken)
     {
         var result = await _unitOfWork.Users.CreateRoleAsync(request.roleName);

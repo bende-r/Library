@@ -1,23 +1,18 @@
-﻿using Application.Interfaces;
-
-
-using Domain.Entities;
-using Domain.Interfaces;
-using Domain.Models.Entities;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-using static Application.Services.TokenService;
+using Application.Interfaces;
+
+using Domain.Entities;
+using Domain.Models.Entities;
+
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services;
+
 public class TokenService : ITokenService
 {
     private readonly JwtToken _jwtOptions;
@@ -37,7 +32,6 @@ public class TokenService : ITokenService
         {
             new Claim(JwtRegisteredClaimNames.Email, applicationUser.Email),
             new Claim(JwtRegisteredClaimNames.Sub, applicationUser.Id),
-
         };
 
         claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
@@ -164,7 +158,3 @@ public class TokenService : ITokenService
 //        RefreshToken = newRefreshToken
 //    };
 //}
-
-
-
-

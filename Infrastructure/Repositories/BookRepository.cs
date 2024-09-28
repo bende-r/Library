@@ -5,13 +5,14 @@ using Domain.Models.Entities;
 using Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Repositories
 {
     public class BookRepository : Repository<Book>, IBookRepository
     {
-        public BookRepository(ApplicationDbContext context) : base(context) { }
+        public BookRepository(ApplicationDbContext context) : base(context)
+        {
+        }
 
         public async Task<Book> GetByISBNAsync(string isbn)
         {
@@ -36,6 +37,5 @@ namespace Infrastructure.Repositories
 
             return PagedList<Book>.ToPagedList(booksQuery, pageNumber, pageSize);
         }
-
     }
 }

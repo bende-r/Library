@@ -13,29 +13,26 @@ const login = (email, password) => {
     .then((response) => {
       console.log(response);
       if (response && response.data && response.data.token) {
-
         localStorage.setItem("user", JSON.stringify(response.data));
         console.log(response.data);
       }
       return response;
     })
     .catch((error) => {
-      throw error; 
+      throw error;
     });
 };
 
-
 const loginWithRefreshToken = (refreshToken) => {
   return axios
-    .post(baseURL + API_URL + "/refreshToken", { refreshToken, })
+    .post(baseURL + API_URL + "/refreshToken", { refreshToken })
     .then((response) => {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
         console.log("set item");
-      }      
+      }
       return response;
-    }
-    );
+    });
 };
 
 const logout = () => {
@@ -46,18 +43,14 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
-
-
 const register = (formData) => {
   return axios
-    .post(baseURL + API_URL + "/register", 
-      formData)
-    .then((response) => {      
-      
+    .post(baseURL + API_URL + "/register", formData)
+    .then((response) => {
       return response;
     })
     .catch((error) => {
-      throw error; 
+      throw error;
     });
 };
 

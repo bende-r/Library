@@ -1,12 +1,14 @@
-﻿using Domain.Entities;
+﻿using System.Text;
+
+using Domain.Entities;
+using Domain.Models.Entities;
+
+using Infrastructure.Data;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
-using System;
-using Domain.Models.Entities;
-using Infrastructure.Data;
 
 namespace API
 {
@@ -27,7 +29,6 @@ namespace API
 
             var key = Encoding.ASCII.GetBytes(secret);
 
-
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -46,7 +47,6 @@ namespace API
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
 
             services.AddSwaggerGen(option =>
             {
@@ -74,7 +74,6 @@ namespace API
             });
 
             services.AddAuthorization();
-
 
             return services;
         }

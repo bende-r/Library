@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Domain.Entities;
+﻿namespace Domain.Entities;
+
 public class Author
 {
     public Guid Id { get; set; }

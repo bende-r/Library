@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PostService from "../services/post.service";
-import curUser from './curUser';
+import curUser from "./curUser";
 import { useNavigate, Link } from "react-router-dom";
-import { genreOptions } from "./optionsData"; // Жанры остаются статическими
-import handleRefresh from './refresh';
+import { genreOptions } from "./optionsData";
+import handleRefresh from "./refresh";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -24,7 +24,7 @@ const Books = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       await getBooksWithPagination(currentPage);
-    };       
+    };
     fetchBooks();
   }, [currentPage]);
 
@@ -33,7 +33,7 @@ const Books = () => {
     const fetchAuthors = async () => {
       try {
         const response = await PostService.getAllAuthors();
-        setAuthors(response.data); // Предполагаем, что это массив авторов с полем id и name
+        setAuthors(response.data);
       } catch (error) {
         console.error("Error fetching authors:", error);
       }
@@ -46,21 +46,24 @@ const Books = () => {
       (response) => {
         let booksData = response.data;
 
-        // Фильтруем книги: если пользователь не админ, скрываем книги с isBorrowed: true
-        // if (!isAdmin) {
-        //   booksData = booksData.filter((book) => !book.isBorrowed);
-        // }
-        console.log(booksData);
         setBooks(booksData);
-        setFilteredBooks(booksData); // Изначально показываем все книги
-        setTotalPages(response.headers['x-pagination'] ? JSON.parse(response.headers['x-pagination']).TotalPages : 1);
-        setTotalItems(response.headers['x-pagination'] ? JSON.parse(response.headers['x-pagination']).TotalCount : 0);
+        setFilteredBooks(booksData);
+        setTotalPages(
+          response.headers["x-pagination"]
+            ? JSON.parse(response.headers["x-pagination"]).TotalPages
+            : 1
+        );
+        setTotalItems(
+          response.headers["x-pagination"]
+            ? JSON.parse(response.headers["x-pagination"]).TotalCount
+            : 0
+        );
       },
       (error) => {
         if (error.response == null) {
           handleRefresh(role, navigate);
         }
-      }  
+      }
     );
   };
 
@@ -90,7 +93,7 @@ const Books = () => {
     const filtered = books.filter((book) => {
       const matchesSearch = book.title.toLowerCase().includes(searchTerm);
       const matchesGenre = genre === "" || book.genre === genre;
-      const matchesAuthor = author === "" || book.authorId === author; // Сравниваем по id автора
+      const matchesAuthor = author === "" || book.authorId === author;
       return matchesSearch && matchesGenre && matchesAuthor;
     });
     setFilteredBooks(filtered);
@@ -107,16 +110,28 @@ const Books = () => {
       <div className="mt-3">
         <h2>Books</h2>
         {/* Фильтр по жанру */}
-        <select className="form-select mb-3" value={selectedGenre} onChange={handleGenreChange}>
+        <select
+          className="form-select mb-3"
+          value={selectedGenre}
+          onChange={handleGenreChange}
+        >
           {genreOptions.map((option) => (
-            <option key={option.value} value={option.value}>{option.label}</option>
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
           ))}
         </select>
         {/* Фильтр по автору */}
-        <select className="form-select mb-3" value={selectedAuthor} onChange={handleAuthorChange}>
+        <select
+          className="form-select mb-3"
+          value={selectedAuthor}
+          onChange={handleAuthorChange}
+        >
           <option value="">Select Author...</option>
           {authors.map((author) => (
-            <option key={author.id} value={author.id}>{author.firstName} {author.lastName}</option> // Используем id автора
+            <option key={author.id} value={author.id}>
+              {author.firstName} {author.lastName}
+            </option> // Используем id автора
           ))}
         </select>
         <div className="input-group mb-3">
@@ -128,7 +143,7 @@ const Books = () => {
             onChange={handleSearch} // Поиск по названию
           />
         </div>
-        
+
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {filteredBooks.map((book) => (
             <div className="col" key={book.id}>
@@ -143,15 +158,27 @@ const Books = () => {
                   style={{ objectFit: "cover", height: "300px" }}
                 />
                 <div className="card-body">
-                  <p className="card-text"><strong>Title:</strong> {book.title}</p>
-                  <p className="card-text"><strong>Author:</strong> {book.author.firstName} {book.author.lastName}</p>
-                  <p className="card-text"><strong>ISBN:</strong> {book.isbn}</p>
-                  <p className="card-text"><strong>Genre:</strong> {book.genre}</p>
-                  <p className="card-text"><strong>Description:</strong> {book.description}</p>
-              
-                    <p className="card-text"><strong>Is Borrowed:</strong> {book.isBorrowed ? "Not avalible" : "No"}</p>
-                 
-               
+                  <p className="card-text">
+                    <strong>Title:</strong> {book.title}
+                  </p>
+                  <p className="card-text">
+                    <strong>Author:</strong> {book.author.firstName}{" "}
+                    {book.author.lastName}
+                  </p>
+                  <p className="card-text">
+                    <strong>ISBN:</strong> {book.isbn}
+                  </p>
+                  <p className="card-text">
+                    <strong>Genre:</strong> {book.genre}
+                  </p>
+                  <p className="card-text">
+                    <strong>Description:</strong> {book.description}
+                  </p>
+
+                  <p className="card-text">
+                    <strong>Is Borrowed:</strong>{" "}
+                    {book.isBorrowed ? "Not avalible" : "No"}
+                  </p>
                 </div>
               </div>
             </div>
@@ -160,8 +187,13 @@ const Books = () => {
         {/* Пагинация */}
         <ul className="pagination justify-content-center">
           {Array.from({ length: totalPages }, (_, i) => (
-            <li className={`page-item ${currentPage === i + 1 ? 'active' : ''}`} key={i}>
-              <button className="page-link" onClick={() => paginate(i + 1)}>{i + 1}</button>
+            <li
+              className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
+              key={i}
+            >
+              <button className="page-link" onClick={() => paginate(i + 1)}>
+                {i + 1}
+              </button>
             </li>
           ))}
         </ul>

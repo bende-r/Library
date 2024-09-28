@@ -6,5 +6,4 @@ namespace Domain.Interfaces
     {
         Task<IEnumerable<Book>> GetBooksByAuthorIdAsync(Guid authorId);
     }
-
 }

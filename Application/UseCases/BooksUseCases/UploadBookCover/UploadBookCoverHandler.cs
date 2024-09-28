@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Exceptions;
 
-using Application.Exceptions;
 using MediatR;
 
 namespace Application.UseCases.BooksUseCases.UploadBookCover
 {
-  
     public class UploadBookCoverHandler : IRequestHandler<UploadBookCoverRequest, UploadBookCoverResponse>
     {
-
         public UploadBookCoverHandler()
         {
         }
+
         public async Task<UploadBookCoverResponse> Handle(UploadBookCoverRequest request, CancellationToken cancellationToken)
         {
             var fileExtension = Path.GetExtension(request.file.FileName);

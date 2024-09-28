@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Domain.Entities;
+﻿using Domain.Entities;
 
 using Infrastructure.Configurations;
 

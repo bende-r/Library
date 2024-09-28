@@ -1,13 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import curUser from './curUser';
+import curUser from "./curUser";
 
 const ProtectedRoute = ({ children, requiredRole }) => {
-    const user = curUser.getCurrentUser();
-    const role = curUser.getUserRole();
+  const user = curUser.getCurrentUser();
+  const role = curUser.getUserRole();
 
-console.log("ProtectedRoute");
-console.log(role)
+  console.log("ProtectedRoute");
+  console.log(role);
   if (!user || !role || !role.includes(requiredRole)) {
     return <Navigate to="/home" />; // Если пользователь не авторизован или не админ, перенаправляем его на страницу логина
   }

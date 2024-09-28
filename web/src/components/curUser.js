@@ -1,9 +1,8 @@
 import { jwtDecode } from "jwt-decode";
 
-
 const curUser = {
   getCurrentUser: () => {
-    const user = JSON.parse(localStorage.getItem('user')); // Предполагается, что объект user хранится в localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.token) return null;
 
     return user;
@@ -18,8 +17,8 @@ const curUser = {
   },
 
   logout: () => {
-    localStorage.removeItem('user'); // Удаление данных пользователя
-  }
+    localStorage.removeItem("user"); // Удаление данных пользователя
+  },
 };
 
 export default curUser;

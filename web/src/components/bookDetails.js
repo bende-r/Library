@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import PostService from "../services/post.service";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
-import handleRefresh from './refresh';
+import handleRefresh from "./refresh";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -31,7 +31,6 @@ const BookDetails = () => {
         console.error("Error fetching book details:", error);
       }
     };
-
     fetchBookDetails();
   }, [id]);
 
@@ -42,10 +41,10 @@ const BookDetails = () => {
       returnDate.setDate(currentDate.getDate() + 30); // Возврат через 30 дней
 
       const borrowRequestBody = {
-        userId: user.user.id,               // Идентификатор пользователя
-        bookId: id,                    // Идентификатор книги
-        borrowDate: currentDate.toISOString(),  // Дата взятия книги
-        returnDate: returnDate.toISOString()   // Дата возврата книги
+        userId: user.user.id, // Идентификатор пользователя
+        bookId: id, // Идентификатор книги
+        borrowDate: currentDate.toISOString(), // Дата взятия книги
+        returnDate: returnDate.toISOString(), // Дата возврата книги
       };
 
       const response = await PostService.borrowBook(
@@ -56,11 +55,11 @@ const BookDetails = () => {
       );
 
       console.log("Book borrowed successfully:", response);
-      alert('You have successfully borrowed the book');
+      alert("You have successfully borrowed the book");
       navigate("/myBooks");
     } catch (error) {
       console.error("Error borrowing the book:", error);
-      alert('An error occurred while borrowing the book.');
+      alert("An error occurred while borrowing the book.");
     }
   };
 
@@ -72,9 +71,7 @@ const BookDetails = () => {
     <div>
       {bookDetails && (
         <div className="card border-primary">
-          <div className="card-header">
-            {bookDetails.title}{" "}
-          </div>
+          <div className="card-header">{bookDetails.title} </div>
           <div className="card-body">
             <img
               src={`/pictures/${bookDetails.imageUrl}`}
@@ -84,7 +81,9 @@ const BookDetails = () => {
             />
             <p className="card-text">{bookDetails.description}</p>
             <p className="card-text">
-              <small className="text-muted">Author: {bookDetails.authorName}</small>
+              <small className="text-muted">
+                Author: {bookDetails.authorName}
+              </small>
             </p>
             <p className="card-text">
               <small className="text-muted">Genre: {bookDetails.genre}</small>
@@ -93,7 +92,9 @@ const BookDetails = () => {
               <small className="text-muted">ISBN: {bookDetails.isbn}</small>
             </p>
             <p className="card-text">
-              <small className="text-muted">Available: {bookDetails.isBorrowed ? "No" : "Yes"}</small>
+              <small className="text-muted">
+                Available: {bookDetails.isBorrowed ? "No" : "Yes"}
+              </small>
             </p>
             {user && !bookDetails.isBorrowed && (
               <button onClick={handleBorrow} className="btn btn-success">

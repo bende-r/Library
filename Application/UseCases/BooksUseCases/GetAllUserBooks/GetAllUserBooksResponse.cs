@@ -1,5 +1,4 @@
 using Domain.Entities;
-using Domain.Models.Entities;
 
 namespace Application.UseCases.EventUseCases.GetAllUserEvents;
 

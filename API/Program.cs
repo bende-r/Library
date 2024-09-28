@@ -1,26 +1,9 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Infrastructure.Data;
-using Application.Mappings;
-using Application.Interfaces;
-using FluentValidation;
-using Domain.Interfaces;
-using Infrastructure.Repositories;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Identity;
 using API;
-using Domain.Entities;
-using Application.UseCases.BooksUseCases.AddBook;
-using Microsoft.OpenApi.Models;
-using MediatR;
-using System.Reflection;
-using Application.Behavior;
-using Application;
-using Application.Services;
-using Infrastructure;
 using API.Middlewares;
+
+using Application;
+
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +14,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
-
 
 builder.Services.AddControllers();
 
@@ -55,7 +37,6 @@ var app = builder.Build();
 // Включение CORS политики
 app.UseCors("AllowAllOrigins");
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -77,7 +58,5 @@ app.UseAuthorization();
 //    .AllowAnyMethod()
 //    .WithExposedHeaders("X-Pagination")
 //    .AllowCredentials());
-
-
 
 app.Run();

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.UseCases.AuthorsUseCases.AddAuthor;
 
-using Application.UseCases.AuthorsUseCases.AddAuthor;
 using Domain.Entities;
 using Domain.Interfaces;
+
 using MediatR;
+
 using Moq;
 
 namespace Tests.UseCasesTest

@@ -1,5 +1,3 @@
-
-
 using Domain.Interfaces;
 
 using MediatR;
@@ -14,10 +12,11 @@ public class GetPagedBooksHandler : IRequestHandler<GetPagedBooksRequest, GetPag
     {
         _unitOfWork = unitOfWork;
     }
+
     public async Task<GetPagedBooksResponse> Handle(GetPagedBooksRequest request, CancellationToken cancellationToken)
     {
-        var res = await _unitOfWork.Books.GetPagedBooksAsync(request.PageNumber, request.PageSize,cancellationToken);
-     
+        var res = await _unitOfWork.Books.GetPagedBooksAsync(request.PageNumber, request.PageSize, cancellationToken);
+
         return new GetPagedBooksResponse()
         {
             books = res,

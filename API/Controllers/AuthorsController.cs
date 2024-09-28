@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using Application.UseCases.AuthorsUseCases.AddAuthor;
+﻿using Application.UseCases.AuthorsUseCases.AddAuthor;
 
 using MediatR;
 

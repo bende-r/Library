@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 
-using Domain.Entities;
 using Infrastructure.Repositories;
 
 namespace Tests.RepositoryTests
@@ -50,7 +45,6 @@ namespace Tests.RepositoryTests
             Assert.Equal("Doe", result.LastName);
         }
 
-
         [Fact]
         public async Task GetByIdAsync_ShouldReturnAuthor()
         {
@@ -82,7 +76,5 @@ namespace Tests.RepositoryTests
             Assert.Equal("John", result.FirstName);
             Assert.Equal("Doe", result.LastName);
         }
-
-
     }
 }

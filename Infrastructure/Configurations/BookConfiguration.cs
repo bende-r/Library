@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configurations
 {
@@ -30,7 +31,7 @@ namespace Infrastructure.Configurations
             builder.Property(b => b.ImageUrl)
          .IsRequired(false);
 
-            builder.Property(b =>b.IsBorrowed).IsRequired();
+            builder.Property(b => b.IsBorrowed).IsRequired();
             // Отношение один ко многим с Author
             builder.HasOne(b => b.Author)
                 .WithMany(a => a.Books)

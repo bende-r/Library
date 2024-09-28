@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.UseCases.BooksUseCases.GetPagedBooks
+﻿namespace Application.UseCases.BooksUseCases.GetPagedBooks
 {
     public class BookWithAuthorDto
     {
@@ -16,5 +10,4 @@ namespace Application.UseCases.BooksUseCases.GetPagedBooks
         public bool IsBorrowed { get; set; }
         public string AuthorName { get; set; }  // Имя автора
     }
-
 }

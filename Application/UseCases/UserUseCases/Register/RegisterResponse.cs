@@ -1,4 +1,3 @@
-
 namespace Application.UseCases.AuthUseCases.Register;
 
 public class RegisterResponse

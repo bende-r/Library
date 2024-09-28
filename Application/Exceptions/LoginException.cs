@@ -2,7 +2,11 @@
 {
     public class LoginException : Exception
     {
-        public LoginException() { }
-        public LoginException(string message) : base(message) { }
+        public LoginException()
+        { }
+
+        public LoginException(string message) : base(message)
+        {
+        }
     }
 }

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.UseCases.AuthUseCases.AssignRole;
 
-public class AssignRoleHandler: IRequestHandler<AssignRoleRequest, AssignRoleResponse>
+public class AssignRoleHandler : IRequestHandler<AssignRoleRequest, AssignRoleResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,6 +14,7 @@ public class AssignRoleHandler: IRequestHandler<AssignRoleRequest, AssignRoleRes
     {
         _unitOfWork = unitOfWork;
     }
+
     public async Task<AssignRoleResponse> Handle(AssignRoleRequest request, CancellationToken cancellationToken)
     {
         var user = await _unitOfWork.Users.GetByNameAsync(request.Email, cancellationToken);

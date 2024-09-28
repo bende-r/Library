@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.UseCases.BooksUseCases.UploadBookCover
 {
     public sealed record UploadBookCoverRequest(IFormFile file, string bookId) : IRequest<UploadBookCoverResponse>
     {
-
     }
-  
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.UseCases
+﻿namespace Application.UseCases
 {
     public class PaginatedResult<T>
     {
@@ -22,5 +16,4 @@ namespace Application.UseCases
             TotalCount = totalCount;
         }
     }
-
 }

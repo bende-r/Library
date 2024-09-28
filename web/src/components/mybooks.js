@@ -2,29 +2,26 @@ import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
 import PostService from "../services/post.service";
 import { useNavigate, Link } from "react-router-dom";
-import handleRefresh from './refresh';
+import handleRefresh from "./refresh";
 
 const UserBooks = () => {
   const [userBooks, setUserBooks] = useState([]);
-  const [refreshBooks, setRefreshBooks] = useState(false); 
+  const [refreshBooks, setRefreshBooks] = useState(false);
   const user = AuthService.getCurrentUser();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     PostService.getUsersBooks(user.user.id).then(
       (response) => {
-        console.log(response.data);
         setUserBooks(response.data);
-        // Добавляем alert для вывода длины массива книг
-      //  alert(`You have ${response.data.length} books.`);
       },
       async (error) => {
         if (error.response == null) {
           handleRefresh(user, navigate);
         } else {
-          alert(error.response.data['ErrorMessage']);
-        }          
+          alert(error.response.data["ErrorMessage"]);
+        }
       }
     );
   }, [navigate, refreshBooks]);
@@ -40,7 +37,7 @@ const UserBooks = () => {
           if (error.response == null) {
             handleRefresh(user, navigate);
           } else {
-            setErrorMessage(error.response.data['ErrorMessage']);
+            setErrorMessage(error.response.data["ErrorMessage"]);
           }
         }
       );
@@ -48,7 +45,7 @@ const UserBooks = () => {
       console.error("Error returning book:", error);
     }
   };
-  
+
   return (
     <div>
       <div className="mt-3">
@@ -68,13 +65,26 @@ const UserBooks = () => {
                 />
                 <div className="card-body">
                   <h5 className="card-title">Book Details</h5>
-                  <p><strong>Title:</strong> {book.title}</p>
-                  <p><strong>Author:</strong> {book.authorName}</p>
-                  <p><strong>ISBN:</strong> {book.isbn}</p>
-                  <p><strong>Genre:</strong> {book.genre}</p>
-                  <p><strong>Description:</strong> {book.description}</p>
-                  <p><strong>Is Borrowed:</strong> {book.isBorrowed ? 'Yes' : 'No'}</p>
-                  
+                  <p>
+                    <strong>Title:</strong> {book.title}
+                  </p>
+                  <p>
+                    <strong>Author:</strong> {book.authorName}
+                  </p>
+                  <p>
+                    <strong>ISBN:</strong> {book.isbn}
+                  </p>
+                  <p>
+                    <strong>Genre:</strong> {book.genre}
+                  </p>
+                  <p>
+                    <strong>Description:</strong> {book.description}
+                  </p>
+                  <p>
+                    <strong>Is Borrowed:</strong>{" "}
+                    {book.isBorrowed ? "Yes" : "No"}
+                  </p>
+
                   <button
                     onClick={handleReturnBook(book.id)}
                     className="btn btn-danger"

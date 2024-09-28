@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using Application.UseCases.BooksUseCases.AddBook;
+﻿using Application.UseCases.BooksUseCases.AddBook;
 using Application.UseCases.BooksUseCases.GetBooksByAuthor;
 using Application.UseCases.BooksUseCases.GetPagedBooks;
 using Application.UseCases.BooksUseCases.UploadBookCover;
@@ -57,7 +55,6 @@ namespace API.Controllers
                 res.books.TotalPages,
                 res.books.HasNext,
                 res.books.HasPrevious,
-              
             };
 
             HttpContext.Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));

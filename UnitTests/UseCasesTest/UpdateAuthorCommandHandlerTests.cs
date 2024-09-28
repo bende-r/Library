@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Application.UseCases.AuthorsUseCases;
 using Application.UseCases.AuthorsUseCases.AddAuthor;
-using Application.UseCases.AuthorsUseCases;
+
 using AutoMapper;
+
 using Domain.Entities;
 using Domain.Interfaces;
+
 using Moq;
 
 namespace Tests.UseCasesTest
@@ -60,16 +57,13 @@ namespace Tests.UseCasesTest
                 Country = updatedAuthorCommand.Country
             });
 
-            // Act
             var result = await _handler.Handle(updatedAuthorCommand, CancellationToken.None);
 
-            // Assert
             Assert.NotNull(result);
             Assert.Equal(updatedAuthorCommand.FirstName, result.FirstName);
             Assert.Equal(updatedAuthorCommand.LastName, result.LastName);
             Assert.Equal(updatedAuthorCommand.Country, result.Country);
 
-            // Проверяем, что методы UpdateAsync и CompleteAsync были вызваны
             _mockUnitOfWork.Verify(uow => uow.Authors.UpdateAsync(author), Times.Once);
             _mockUnitOfWork.Verify(uow => uow.CompleteAsync(), Times.Once);
         }
@@ -77,7 +71,6 @@ namespace Tests.UseCasesTest
         [Fact]
         public async Task Handle_ShouldThrowException_WhenAuthorNotFound()
         {
-            // Arrange
             var authorId = Guid.NewGuid();
             var updateCommand = new UpdateAuthorCommand
             {
@@ -90,7 +83,6 @@ namespace Tests.UseCasesTest
 
             _mockUnitOfWork.Setup(uow => uow.Authors.GetByIdAsync(authorId)).ReturnsAsync((Author)null);
 
-            // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _handler.Handle(updateCommand, CancellationToken.None));
             Assert.Equal("Author not found", exception.Message);
         }
