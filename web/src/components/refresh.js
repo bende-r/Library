@@ -1,7 +1,6 @@
-import AuthService from "../services/auth.service"; 
+import AuthService from "../services/auth.service";
 
-const handleRefresh = async (user, navigate) => {  
-  console.log("here");
+const handleRefresh = async (user, navigate) => {
   if (user != null) {
     await AuthService.loginWithRefreshToken(user.user.refreshToken).then(
       () => {

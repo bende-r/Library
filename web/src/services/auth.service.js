@@ -11,10 +11,8 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      console.log(response);
       if (response && response.data && response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
-        console.log(response.data);
       }
       return response;
     })
@@ -29,7 +27,6 @@ const loginWithRefreshToken = (refreshToken) => {
     .then((response) => {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
-        console.log("set item");
       }
       return response;
     });

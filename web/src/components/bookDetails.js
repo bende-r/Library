@@ -53,12 +53,9 @@ const BookDetails = () => {
         borrowRequestBody.borrowDate,
         borrowRequestBody.returnDate
       );
-
-      console.log("Book borrowed successfully:", response);
       alert("You have successfully borrowed the book");
       navigate("/myBooks");
     } catch (error) {
-      console.error("Error borrowing the book:", error);
       alert("An error occurred while borrowing the book.");
     }
   };

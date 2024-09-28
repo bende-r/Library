@@ -30,7 +30,6 @@ const deleteBook = (BookId) => {
 };
 
 const updateBook = (formData) => {
-  console.log(formData);
   return axios
     .put(baseURL + API_URL + "books/" + formData.id, formData, {
       headers: authHeader(),
@@ -86,7 +85,6 @@ const registerOnBook = (userId, BookId) => {
 };
 
 const unregisterFromBook = (userId, BookId) => {
-  console.log(BookId);
   return axios
     .post(
       baseURL + API_URL + "Books/unRegisterOnBook/",
