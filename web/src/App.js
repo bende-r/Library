@@ -11,6 +11,10 @@ import EditBook from "./components/editBook";
 import AddBook from "./components/addBook";
 import Mybooks from "./components/mybooks";
 import ProtectedRoute from "./components/protectedRoute";
+import AddAuthor from "./components/AddAuthor"; // Компонент добавления автора
+import EditAuthor from "./components/EditAuthor"; // Компонент редактирования автора
+import AuthorDetails from "./components/AuthorDetails"; // Компонент просмотра автора
+import AuthorsPage from "./components/AuthorsPage";
 
 function App() {
   return (
@@ -46,6 +50,46 @@ function App() {
               element={
                 <ProtectedRoute requiredRole="Admin">
                   <EditBook />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Маршрут для добавления автора */}
+            <Route
+              path="/authors"
+              element={
+                <ProtectedRoute requiredRole="Admin">
+                  <AuthorsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Маршрут для добавления автора */}
+            <Route
+              path="/addAuthor"
+              element={
+                <ProtectedRoute requiredRole="Admin">
+                  <AddAuthor />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Маршрут для редактирования автора */}
+            <Route
+              path="/editAuthor/:id"
+              element={
+                <ProtectedRoute requiredRole="Admin">
+                  <EditAuthor />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Маршрут для просмотра деталей автора */}
+            <Route
+              path="/authorDetails/:id"
+              element={
+                <ProtectedRoute requiredRole="Admin">
+                  <AuthorDetails />
                 </ProtectedRoute>
               }
             />

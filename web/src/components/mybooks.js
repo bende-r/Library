@@ -14,6 +14,7 @@ const UserBooks = () => {
   useEffect(() => {
     PostService.getUsersBooks(user.user.id).then(
       (response) => {
+        console.log(response);
         setUserBooks(response.data);
       },
       async (error) => {
@@ -69,7 +70,8 @@ const UserBooks = () => {
                     <strong>Title:</strong> {book.title}
                   </p>
                   <p>
-                    <strong>Author:</strong> {book.authorName}
+                    <strong>Author:</strong> {book.author.firstName}{" "}
+                    {book.author.lastName}
                   </p>
                   <p>
                     <strong>ISBN:</strong> {book.isbn}

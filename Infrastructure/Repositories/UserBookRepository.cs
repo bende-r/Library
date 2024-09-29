@@ -19,7 +19,7 @@ namespace Infrastructure.Repositories
         {
             var userEv = await _dbSet
                 .Where(eu => eu.UserId == userId)
-                .Include(eu => eu.Book)
+                .Include(eu => eu.Book).Include(eu => eu.Book.Author)
                 .Select(eu => eu.Book
                 )
                 .ToListAsync();

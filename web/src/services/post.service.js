@@ -115,21 +115,13 @@ const getUsersBooks = (userId) => {
 const getPagedBooks = (pageNumber, pageSize) => {
   return axios
     .post(
-      baseURL + API_URL + "Books/getPagedBooks",
+      baseURL + API_URL + "books/getPagedBooks",
       { pageNumber, pageSize },
       { headers: authHeader() }
     )
     .then((response) => {
       return response;
     })
-    .catch((error) => {
-      throw error;
-    });
-};
-
-const getAllAuthors = () => {
-  return axios
-    .get(baseURL + API_URL + "authors", { headers: authHeader() })
     .catch((error) => {
       throw error;
     });
@@ -170,6 +162,57 @@ const returnBook = (userId, bookId) => {
     });
 };
 
+const getAllAuthors = () => {
+  return axios
+    .get(baseURL + API_URL + "authors", { headers: authHeader() })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+const addAuthor = (authorData) => {
+  return axios
+    .post(baseURL + API_URL + "Authors", authorData, {
+      headers: authHeader(),
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+// Метод для получения автора по ID (GET)
+const getAuthorById = (id) => {
+  return axios
+    .get(baseURL + API_URL + "Authors/" + id, {
+      headers: authHeader(),
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+// Метод для обновления автора по ID (PUT)
+const updateAuthor = (formData) => {
+  return axios
+    .put(baseURL + API_URL + "Authors/" + formData.id, formData, {
+      headers: authHeader(),
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+// Метод для удаления автора по ID (DELETE)
+const deleteAuthor = (id) => {
+  return axios
+    .delete(baseURL + API_URL + "Authors/" + id, {
+      headers: authHeader(),
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
 const postService = {
   getAllBooks,
   getBookById,
@@ -185,6 +228,10 @@ const postService = {
   getAllAuthors,
   borrowBook,
   returnBook,
+  addAuthor,
+  getAuthorById,
+  updateAuthor,
+  deleteAuthor,
 };
 
 export default postService;

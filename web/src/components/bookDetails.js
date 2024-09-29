@@ -17,6 +17,7 @@ const BookDetails = () => {
       try {
         await PostService.getBookById(id).then(
           (response) => {
+            console.log(response);
             setBookDetails(response.data);
             setLoading(false);
           },
@@ -71,10 +72,10 @@ const BookDetails = () => {
           <div className="card-header">{bookDetails.title} </div>
           <div className="card-body">
             <img
-              src={`/pictures/${bookDetails.imageUrl}`}
+              src={`/pictures/${bookDetails.imageUrl || "default.jpg"}`}
               className="card-img-top"
               alt={bookDetails.title}
-              style={{ objectFit: "cover", height: "300px", width: "300px" }}
+              style={{ objectFit: "cover", height: "300px", width: "260px" }}
             />
             <p className="card-text">{bookDetails.description}</p>
             <p className="card-text">

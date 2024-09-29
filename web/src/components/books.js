@@ -9,6 +9,7 @@ const Books = () => {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]); // Состояние для отфильтрованных книг
   const [searchTerm, setSearchTerm] = useState("");
+  const [isbnSearchTerm, setIsbnSearchTerm] = useState(""); // Новое состояние для поиска по ISBN
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedAuthor, setSelectedAuthor] = useState("");
   const [authors, setAuthors] = useState([]); // Состояние для списка авторов
@@ -16,7 +17,7 @@ const Books = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
 
-  const pageSize = 5;
+  const pageSize = 6;
   const role = curUser.getUserRole(); // Получаем информацию о пользователе
   const isAdmin = role && role.includes("Admin"); // Проверка роли администратора
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Books = () => {
     await PostService.getPagedBooks(page, pageSize).then(
       (response) => {
         let booksData = response.data;
-
+        console.log(response);
         setBooks(booksData);
         setFilteredBooks(booksData);
         setTotalPages(
@@ -71,30 +72,40 @@ const Books = () => {
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    applyFilters(term, selectedGenre, selectedAuthor);
+    applyFilters(term, isbnSearchTerm, selectedGenre, selectedAuthor);
+  };
+
+  // Поиск по ISBN
+  const handleIsbnSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setIsbnSearchTerm(term);
+    applyFilters(searchTerm, term, selectedGenre, selectedAuthor);
   };
 
   // Фильтрация по жанру
   const handleGenreChange = (e) => {
     const genre = e.target.value;
     setSelectedGenre(genre);
-    applyFilters(searchTerm, genre, selectedAuthor);
+    applyFilters(searchTerm, isbnSearchTerm, genre, selectedAuthor);
   };
 
   // Фильтрация по автору
   const handleAuthorChange = (e) => {
     const author = e.target.value;
     setSelectedAuthor(author);
-    applyFilters(searchTerm, selectedGenre, author);
+    applyFilters(searchTerm, isbnSearchTerm, selectedGenre, author);
   };
 
   // Применение фильтров
-  const applyFilters = (searchTerm, genre, author) => {
+  const applyFilters = (searchTerm, isbnSearchTerm, genre, author) => {
     const filtered = books.filter((book) => {
       const matchesSearch = book.title.toLowerCase().includes(searchTerm);
+      const matchesIsbn =
+        isbnSearchTerm === "" ||
+        book.isbn.toLowerCase().includes(isbnSearchTerm);
       const matchesGenre = genre === "" || book.genre === genre;
       const matchesAuthor = author === "" || book.authorId === author;
-      return matchesSearch && matchesGenre && matchesAuthor;
+      return matchesSearch && matchesIsbn && matchesGenre && matchesAuthor;
     });
     setFilteredBooks(filtered);
   };
@@ -131,16 +142,27 @@ const Books = () => {
           {authors.map((author) => (
             <option key={author.id} value={author.id}>
               {author.firstName} {author.lastName}
-            </option> // Используем id автора
+            </option>
           ))}
         </select>
+        {/* Поиск по названию */}
         <div className="input-group mb-3">
           <input
             type="text"
             className="form-control"
             placeholder="Search by title..."
             value={searchTerm}
-            onChange={handleSearch} // Поиск по названию
+            onChange={handleSearch}
+          />
+        </div>
+        {/* Поиск по ISBN */}
+        <div className="input-group mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search by ISBN..."
+            value={isbnSearchTerm}
+            onChange={handleIsbnSearch} // Поиск по ISBN
           />
         </div>
 
@@ -177,7 +199,7 @@ const Books = () => {
 
                   <p className="card-text">
                     <strong>Is Borrowed:</strong>{" "}
-                    {book.isBorrowed ? "Not avalible" : "No"}
+                    {book.isBorrowed ? "Not available" : "No"}
                   </p>
                 </div>
               </div>

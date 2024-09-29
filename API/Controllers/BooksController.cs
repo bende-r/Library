@@ -44,7 +44,7 @@ namespace API.Controllers
         }
 
         [HttpPost("getPagedBooks")]
-        public async Task<IActionResult> GetPagedEvents([FromBody] GetPagedBooksRequest pageParams, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetPagedBooks([FromBody] GetPagedBooksRequest pageParams, CancellationToken cancellationToken)
         {
             var res = await _mediator.Send(pageParams, cancellationToken);
             var metadata = new
@@ -57,7 +57,7 @@ namespace API.Controllers
                 res.books.HasPrevious,
             };
 
-            HttpContext.Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
+            HttpContext.Response.Headers.Append("x-pagination", JsonConvert.SerializeObject(metadata));
             return Ok(res.books);
         }
 

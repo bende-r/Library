@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.UseCases.BooksUseCases.AddBook;
+
+using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Models.Entities;
 
@@ -12,6 +14,14 @@ namespace Infrastructure.Repositories
     {
         public BookRepository(ApplicationDbContext context) : base(context)
         {
+        }
+
+        public new async Task<Book> GetByIdAsync(Guid id)
+        {
+            return await _dbSet
+       .Include(book => book.Author)
+       .FirstOrDefaultAsync(book => book.Id == id);
+
         }
 
         public async Task<Book> GetByISBNAsync(string isbn)
