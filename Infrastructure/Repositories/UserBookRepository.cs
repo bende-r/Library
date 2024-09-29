@@ -1,11 +1,15 @@
 ﻿using System.Linq.Expressions;
 
+
+
 using Domain.Entities;
 using Domain.Interfaces;
 
 using Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
+
+using static Application.UseCases.EventUseCases.GetAllUserEvents.GetAllUserBooksResponse;
 
 namespace Infrastructure.Repositories
 {
@@ -15,14 +19,30 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<IEnumerable<Book>> GetBooksTakenByUserAsync(string userId)
+        public async Task<IEnumerable<BorrowedBook>> GetBooksTakenByUserAsync(string userId)
         {
             var userEv = await _dbSet
                 .Where(eu => eu.UserId == userId)
-                .Include(eu => eu.Book).Include(eu => eu.Book.Author)
-                .Select(eu => eu.Book
-                )
-                .ToListAsync();
+                .Include(eu => eu.Book)
+                .Include(eu => eu.Book.Author)
+                .Select(ub => new BorrowedBook
+                {
+                    Id = ub.Book.Id,
+                    ISBN = ub.Book.ISBN,
+                    Title = ub.Book.Title,
+                    Genre = ub.Book.Genre,
+                    Description = ub.Book.Description,
+                    Author = ub.Book.Author,
+                    AuthorId = ub.Book.AuthorId,
+                    IsBorrowed = ub.Book.IsBorrowed,
+
+                    ImageUrl = ub.Book.ImageUrl,  
+                  
+                    BorrowedDate = ub.BorrowedDate,
+                    ReturnDate = ub.ReturnDate,
+                 
+                })
+        .ToListAsync();
 
             return userEv;
         }

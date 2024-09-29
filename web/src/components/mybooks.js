@@ -83,6 +83,14 @@ const UserBooks = () => {
                     <strong>Description:</strong> {book.description}
                   </p>
                   <p>
+                    <strong>Borrowed Date:</strong>{" "}
+                    {new Date(book.borrowedDate).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <strong>Return Date:</strong>{" "}
+                    {new Date(book.returnDate).toLocaleDateString()}
+                  </p>
+                  <p>
                     <strong>Is Borrowed:</strong>{" "}
                     {book.isBorrowed ? "Yes" : "No"}
                   </p>

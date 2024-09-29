@@ -1,0 +1,81 @@
+version: "3.8"
+
+services:
+  # Backend service (API)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=LibraryDatabase;User=sa;Password=YourStrong@Passw0rd;
+    networks:
+      - app-network
+    entrypoint: ["bash", "-c", "dotnet ef database update && dotnet run"] # Run migrations before starting the API
+    ports:
+      - "5051:80"
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: frontend
+    networks:
+      - app-network
+    ports:
+      - "3000:80"
+
+  # SQL Server service
+  db:
+    image: mcr.microsoft.com/mssql/server
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "YourStrong@Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "7070:7070"
+    networks:
+      - app-network
+    volumes:
+      - sqlvolume:/var/opt/mssql
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  sqlvolume:
+# version: "3.8"
+
+# services:
+#   nginx:
+#     image: nginx:alpine
+#     ports:
+#       - "80:80"
+#     volumes:
+#       - ./nginx.conf:/etc/nginx/nginx.conf
+#     depends_on:
+#       - frontend
+#       - backend
+
+#   frontend:
+#     build:
+#       context: ./web
+#       dockerfile: Dockerfile
+#     ports:
+#       - "3000:80" # React будет работать на порту 3000
+#     depends_on:
+#       - backend
+
+#   backend:
+#     build:
+#       context: ./
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5051:80" # ASP.NET Core будет работать на порту 5000
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Development
