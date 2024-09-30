@@ -5,10 +5,10 @@
 
 ## Начало работы
 
-Пред запуском приложения у вас в системе должно быть установлено следующее программное обеспечение:
+Перед запуском приложения у вас в системе должно быть установлено следующее программное обеспечение:
 
-- .Net 8
-- MS SQL
+- .Net 8.0
+- Microsoft SQL Server 2022
 - Node.js
 
 ## Запуск
@@ -23,6 +23,16 @@ git clone https://github.com/bende-r/Library.git
 
 ```
 cd Library
+```
+
+### Настройка подключения к серверу
+
+В файле appsettings.json укажите используемый SQL сервер и имя будущей базы данных. Например:
+
+```
+"ConnectionStrings": {
+  "DefaultConnection": "Server=.\\SQLEXPRESS; Database=LibraryDatabase; Trusted_Connection=True; TrustServerCertificate=True;"
+},
 ```
 
 ### Выполните миграцию для создания базы данных
