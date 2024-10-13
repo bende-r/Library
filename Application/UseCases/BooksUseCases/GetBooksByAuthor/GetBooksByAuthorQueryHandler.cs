@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Interfaces;
 
@@ -19,13 +21,22 @@ namespace Application.UseCases.BooksUseCases.GetBooksByAuthor
 
         public async Task<IEnumerable<BookResponse>> Handle(GetBooksByAuthorQuery request, CancellationToken cancellationToken)
         {
-            var books = await _unitOfWork.Books.GetBooksByAuthorAsync(request.AuthorId);
-
-            if (books == null || !books.Any())
+            // Проверка на валидность AuthorId
+            if (request.AuthorId == Guid.Empty)
             {
-                throw new Exception("No books found for this author");
+                throw new BadRequestException("AuthorId cannot be empty.");
             }
 
+            // Получение списка книг автора
+            var books = await _unitOfWork.Books.GetBooksByAuthorAsync(request.AuthorId);
+
+            // Если книги не найдены, выбрасываем NotFoundException
+            if (books == null || !books.Any())
+            {
+                throw new NotFoundException($"No books found for author with ID {request.AuthorId}.");
+            }
+
+            // Возвращаем книги
             return _mapper.Map<IEnumerable<BookResponse>>(books);
         }
     }

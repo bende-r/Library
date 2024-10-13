@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Interfaces;
 
@@ -23,7 +25,7 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
 
             if (author == null)
             {
-                throw new Exception("Author not found");
+                throw new NotFoundException($"Author with ID {request.Id} was not found.");
             }
 
             return _mapper.Map<AddAuthorResponse>(author);

@@ -7,6 +7,8 @@ import curUser from "./curUser";
 const Header = () => {
   const user = curUser.getCurrentUser();
 
+  console.log(user);
+
   const role = curUser.getUserRole();
 
   const navigate = useNavigate();

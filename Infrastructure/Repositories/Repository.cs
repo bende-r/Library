@@ -1,4 +1,7 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Entities;
+using System.Linq.Expressions;
+
+using Domain.Interfaces;
 
 using Infrastructure.Data;
 
@@ -35,6 +38,11 @@ namespace Infrastructure.Repositories
         public async Task UpdateAsync(T entity)
         {
             _dbSet.Update(entity);
+        }
+
+        public async Task<T?> FindAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.FirstOrDefaultAsync(predicate);
         }
 
         public async Task DeleteAsync(Guid id)

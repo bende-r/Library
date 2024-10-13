@@ -35,11 +35,6 @@ namespace API.Controllers
             var query = new GetAuthorByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
 
-            if (result == null)
-            {
-                return NotFound();
-            }
-
             return Ok(result);
         }
 

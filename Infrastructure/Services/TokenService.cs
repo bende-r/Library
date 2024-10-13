@@ -11,7 +11,7 @@ using Domain.Models.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Services;
+namespace Infrastructure.Services;
 
 public class TokenService : ITokenService
 {

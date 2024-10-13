@@ -45,6 +45,10 @@ namespace API.Middlewares
                     statusCode = HttpStatusCode.BadRequest;
                     break;
 
+                case AlreadyExistsException _:
+                    statusCode = HttpStatusCode.Conflict;
+                    break;
+
                 case ValidationException validationException:
                     statusCode = HttpStatusCode.BadRequest;
                     result = JsonConvert.SerializeObject(validationException.Errors);

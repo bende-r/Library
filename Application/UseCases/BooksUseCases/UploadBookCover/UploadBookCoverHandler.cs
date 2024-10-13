@@ -1,34 +1,29 @@
 ﻿using Application.Exceptions;
 
+using Domain.Interfaces;
+
+
 using MediatR;
+
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.UseCases.BooksUseCases.UploadBookCover
 {
     public class UploadBookCoverHandler : IRequestHandler<UploadBookCoverRequest, UploadBookCoverResponse>
     {
-        public UploadBookCoverHandler()
+        private readonly IImageService _imageService;
+
+        public UploadBookCoverHandler(IImageService imageService)
         {
+            _imageService = imageService;
         }
 
         public async Task<UploadBookCoverResponse> Handle(UploadBookCoverRequest request, CancellationToken cancellationToken)
         {
-            var fileExtension = Path.GetExtension(request.file.FileName);
+            var filePath = await _imageService.UploadImageAsync(request.bookId, request.file, cancellationToken);
 
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", };
-
-            if (allowedExtensions.Contains(fileExtension.ToLowerInvariant()))
-            {
-                var parentDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-                var path = Path.Combine(parentDirectory, "web/public/pictures", request.bookId + request.file.FileName);
-
-                using var stream = new FileStream(path, FileMode.Create);
-                await request.file.CopyToAsync(stream, cancellationToken);
-            }
-            else
-            {
-                throw new ImageUploadException("Wrong extension");
-            }
-            return new UploadBookCoverResponse() { Message = request.bookId + request.file.FileName };
+            return new UploadBookCoverResponse() { Message = filePath };
         }
     }
 }

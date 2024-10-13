@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Entities;
 using Domain.Interfaces;
@@ -24,20 +26,31 @@ namespace Application.UseCases.UsersBooksUseCases.BorrowBook
             var book = await _unitOfWork.Books.GetByIdAsync(request.BookId);
             if (book == null)
             {
-                throw new Exception("Book not found");
+                throw new NotFoundException($"Book with ID {request.BookId} was not found.");
             }
 
             // Проверяем, доступна ли книга
             if (book.IsBorrowed)
             {
-                throw new Exception("Book is already borrowed");
+                throw new AlreadyExistsException("Book is already borrowed.");
             }
 
-            // Получаем пользователя
+            // Проверяем наличие пользователя
             var user = await _unitOfWork.Users.GetByIdAsync(request.UserId, cancellationToken);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new NotFoundException($"User with ID {request.UserId} was not found.");
+            }
+
+            // Проверка корректности даты взятия и возврата книги
+            if (request.BorrowDate == null || request.ReturnDate == null)
+            {
+                throw new BadRequestException("BorrowDate and ReturnDate are required.");
+            }
+
+            if (request.ReturnDate <= request.BorrowDate)
+            {
+                throw new BadRequestException("ReturnDate must be later than BorrowDate.");
             }
 
             // Создаем связь между пользователем и книгой (UserBook)

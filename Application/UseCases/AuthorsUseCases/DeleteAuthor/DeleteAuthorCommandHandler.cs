@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using Application.Exceptions;
+
+using Domain.Interfaces;
 
 using MediatR;
 
@@ -16,9 +18,10 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
         public async Task<Unit> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = await _unitOfWork.Authors.GetByIdAsync(request.Id);
+
             if (author == null)
             {
-                throw new Exception("Author not found");
+                throw new NotFoundException($"Author with ID {request.Id} was not found.");
             }
 
             await _unitOfWork.Authors.DeleteAsync(author.Id);

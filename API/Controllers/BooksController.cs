@@ -27,19 +27,10 @@ namespace API.Controllers
             _mediator = mediator;
         }
 
-        //// Получить все книги
-        //[HttpGet]
-        //public async Task<IActionResult> GetAllBooks(CancellationToken cancellationToken)
-        //{
-        //    var query = new GetAllBooksQuery();
-        //    var result = await _mediator.Send(query, cancellationToken);
-        //    return Ok(result);
-        //}
-
         [HttpGet("books")]
-        public async Task<IActionResult> GetAllBooksAsync(CancellationToken cancellationToken, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetAllBooksAsync(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetAllBooksQuery(page, pageSize), cancellationToken);
+            var result = await _mediator.Send(new GetAllBooksQuery(), cancellationToken);
             return Ok(result);
         }
 
@@ -67,11 +58,6 @@ namespace API.Controllers
         {
             var query = new GetBookByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
-
-            if (result == null)
-            {
-                return NotFound();
-            }
 
             return Ok(result);
         }
@@ -139,7 +125,6 @@ namespace API.Controllers
         public async Task<IActionResult> GetAllUserBooks(string id, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(new GetAllUserBooksRequest(id), cancellationToken);
-
             return Ok(response.books);
         }
 

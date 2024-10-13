@@ -1,7 +1,16 @@
-﻿using Domain.Interfaces;
+﻿using Application.Behavior;
+using Application.Interfaces;
+using System.Reflection;
+
+using Domain.Interfaces;
+
+using FluentValidation;
 
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
+
+using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,8 +32,10 @@ namespace Infrastructure
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IUserBookRepository, UserBookRepository>();
-
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             return services;
         }

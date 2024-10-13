@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Interfaces;
 
@@ -19,13 +21,22 @@ namespace Application.UseCases.BooksUseCases.AddBook
 
         public async Task<BookResponse> Handle(GetBookByIsbnQuery request, CancellationToken cancellationToken)
         {
-            var book = await _unitOfWork.Books.GetByISBNAsync(request.ISBN);
-
-            if (book == null)
+            // Проверка на валидность ISBN
+            if (string.IsNullOrWhiteSpace(request.ISBN))
             {
-                throw new Exception("Book not found");
+                throw new BadRequestException("ISBN cannot be empty.");
             }
 
+            // Получение книги по ISBN
+            var book = await _unitOfWork.Books.GetByISBNAsync(request.ISBN);
+
+            // Если книга не найдена, бросаем исключение NotFound
+            if (book == null)
+            {
+                throw new NotFoundException($"Book with ISBN {request.ISBN} was not found.");
+            }
+
+            // Возвращаем информацию о книге
             return _mapper.Map<BookResponse>(book);
         }
     }

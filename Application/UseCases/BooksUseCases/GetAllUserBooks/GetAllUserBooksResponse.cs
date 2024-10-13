@@ -1,5 +1,3 @@
-
-
 using Domain.Entities;
 
 namespace Application.UseCases.EventUseCases.GetAllUserEvents;

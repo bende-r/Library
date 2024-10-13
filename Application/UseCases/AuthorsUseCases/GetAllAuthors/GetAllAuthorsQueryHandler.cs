@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Interfaces;
 
@@ -20,6 +22,12 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
         public async Task<IEnumerable<AuthorResponse>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
         {
             var authors = await _unitOfWork.Authors.GetAllAsync();
+
+            if (authors == null || !authors.Any())
+            {
+                throw new NotFoundException( "No authors found.");
+            }
+
             return _mapper.Map<IEnumerable<AuthorResponse>>(authors);
         }
     }

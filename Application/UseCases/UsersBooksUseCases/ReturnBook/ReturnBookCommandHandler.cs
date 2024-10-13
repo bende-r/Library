@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Interfaces;
 
@@ -23,28 +25,29 @@ namespace Application.UseCases.UsersBooksUseCases.ReturnBook
             var book = await _unitOfWork.Books.GetByIdAsync(request.BookId);
             if (book == null)
             {
-                throw new Exception("Book not found");
+                throw new NotFoundException($"Book with ID {request.BookId} was not found.");
             }
 
             // Проверяем, была ли книга выдана
             if (!book.IsBorrowed)
             {
-                throw new Exception("Book is not borrowed");
+                throw new BadRequestException("Book is not borrowed.");
             }
 
             // Получаем пользователя
             var user = await _unitOfWork.Users.GetByIdAsync(request.UserId, cancellationToken);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new NotFoundException($"User with ID {request.UserId} was not found.");
             }
 
             // Получаем запись о выдаче книги пользователю
             var userBook = await _unitOfWork.UserBooks.FindAsync(ub => ub.UserId == request.UserId && ub.BookId == request.BookId, cancellationToken);
             if (userBook == null)
             {
-                throw new Exception("Borrow record not found");
+                throw new NotFoundException("Borrow record not found.");
             }
+
             // Обновляем статус книги на "доступна"
             book.IsBorrowed = false;
 

@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-
+﻿using Application.Exceptions;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
-
 using MediatR;
+using FluentValidation;
 
 namespace Application.UseCases.BooksUseCases.AddBook
 {
@@ -11,18 +11,36 @@ namespace Application.UseCases.BooksUseCases.AddBook
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IValidator<AddBookCommand> _validator;
 
-        public AddBookCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public AddBookCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IValidator<AddBookCommand> validator)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _validator = validator;
         }
 
         public async Task<AddBookResponse> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
-            var book = _mapper.Map<Book>(request);
-            book.IsBorrowed = false; // New book is not borrowed by default
+            // Применение валидации через FluentValidation
+            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new BadRequestException(validationResult.Errors.Select(e => e.ErrorMessage).FirstOrDefault());
+            }
 
+            // Проверка на дублирование книги с таким же ISBN
+            var existingBook = await _unitOfWork.Books.FindAsync(b => b.ISBN == request.ISBN);
+            if (existingBook != null)
+            {
+                throw new AlreadyExistsException("A book with the same ISBN already exists.");
+            }
+
+            // Создание новой книги
+            var book = _mapper.Map<Book>(request);
+            book.IsBorrowed = false; // Новая книга не взята по умолчанию
+
+            // Добавление книги
             await _unitOfWork.Books.AddAsync(book);
             await _unitOfWork.CompleteAsync();
 

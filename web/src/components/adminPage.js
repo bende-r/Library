@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PostService from "../services/post.service";
 import AuthService from "../services/auth.service";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, resolvePath } from "react-router-dom";
 import handleRefresh from "./refresh";
 
 const AdminPage = () => {
@@ -15,7 +15,8 @@ const AdminPage = () => {
     const fetchBooks = async () => {
       await PostService.getAllBooks().then(
         (response) => {
-          setBooks(response.data.items || []);
+          console.log(response);
+          setBooks(response.data || []);
         },
         async (error) => {
           if (error.response == null) {

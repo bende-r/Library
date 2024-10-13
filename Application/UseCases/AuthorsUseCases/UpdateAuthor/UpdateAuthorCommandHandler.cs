@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+
+using AutoMapper;
 
 using Domain.Interfaces;
 
@@ -19,13 +21,27 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
 
         public async Task<UpdateAuthorResponse> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
+            // Проверка на существование автора
             var author = await _unitOfWork.Authors.GetByIdAsync(request.Id);
-
             if (author == null)
             {
-                throw new Exception("Author not found");
+                throw new NotFoundException($"Author with ID {request.Id} was not found.");
             }
 
+            // Проверка на дубликаты
+            var existingAuthor = await _unitOfWork.Authors.FindAsync(a =>
+                a.FirstName == request.FirstName &&
+                a.LastName == request.LastName &&
+                a.Country == request.Country &&
+                a.DateOfBirth == request.DateOfBirth &&
+                a.Id != request.Id); // Исключаем текущего автора
+
+            if (existingAuthor != null)
+            {
+                throw new AlreadyExistsException("Author with the same name and details already exists.");
+            }
+
+            // Обновление данных автора
             _mapper.Map(request, author);
             await _unitOfWork.Authors.UpdateAsync(author);
             await _unitOfWork.CompleteAsync();
