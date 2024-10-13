@@ -1,8 +1,6 @@
 using System.Reflection;
 
 using Application.Behavior;
-using Application.Interfaces;
-
 
 using FluentValidation;
 
@@ -16,8 +14,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
     {
-  
-
         // Регистрация MediatR
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 

@@ -1,15 +1,11 @@
 ﻿using System.Linq.Expressions;
 
-
-
 using Domain.Entities;
 using Domain.Interfaces;
 
 using Infrastructure.Data;
 
 using Microsoft.EntityFrameworkCore;
-
-using static Application.UseCases.EventUseCases.GetAllUserEvents.GetAllUserBooksResponse;
 
 namespace Infrastructure.Repositories
 {
@@ -36,11 +32,10 @@ namespace Infrastructure.Repositories
                     AuthorId = ub.Book.AuthorId,
                     IsBorrowed = ub.Book.IsBorrowed,
 
-                    ImageUrl = ub.Book.ImageUrl,  
-                  
+                    ImageUrl = ub.Book.ImageUrl,
+
                     BorrowedDate = ub.BorrowedDate,
                     ReturnDate = ub.ReturnDate,
-                 
                 })
         .ToListAsync();
 

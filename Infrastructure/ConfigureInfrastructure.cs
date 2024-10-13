@@ -1,16 +1,10 @@
-﻿using Application.Behavior;
-using Application.Interfaces;
-using System.Reflection;
+﻿using Application.Interfaces;
 
 using Domain.Interfaces;
-
-using FluentValidation;
 
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
-
-using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -1,12 +1,6 @@
-﻿using Application.Exceptions;
-
-using Domain.Interfaces;
-
+﻿using Domain.Interfaces;
 
 using MediatR;
-
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Application.UseCases.BooksUseCases.UploadBookCover
 {

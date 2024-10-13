@@ -15,6 +15,7 @@ namespace Application.UseCases.BooksUseCases.AddBook
             RuleFor(b => b.Description).NotEmpty().Length(2, 300);
             RuleFor(b => b.AuthorId).NotEmpty();
         }
+
         private bool IsValidIsbn(string isbn)
         {
             return IsbnValidator.IsValidIsbn(isbn);

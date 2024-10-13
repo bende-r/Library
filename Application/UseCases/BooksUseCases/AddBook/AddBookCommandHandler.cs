@@ -1,9 +1,13 @@
 ﻿using Application.Exceptions;
+
 using AutoMapper;
+
 using Domain.Entities;
 using Domain.Interfaces;
-using MediatR;
+
 using FluentValidation;
+
+using MediatR;
 
 namespace Application.UseCases.BooksUseCases.AddBook
 {

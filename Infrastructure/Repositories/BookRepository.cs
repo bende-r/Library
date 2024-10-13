@@ -1,6 +1,4 @@
-﻿using Application.UseCases.BooksUseCases.AddBook;
-
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Models.Entities;
 
@@ -21,7 +19,6 @@ namespace Infrastructure.Repositories
             return await _dbSet
        .Include(book => book.Author)
        .FirstOrDefaultAsync(book => book.Id == id);
-
         }
 
         public async Task<Book> GetByISBNAsync(string isbn)

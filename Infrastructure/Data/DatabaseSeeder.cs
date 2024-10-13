@@ -3,8 +3,6 @@ using Domain.Interfaces;
 
 using Microsoft.AspNetCore.Identity;
 
-using System.Threading.Tasks;
-
 namespace Infrastructure.Data
 {
     public class DatabaseSeeder

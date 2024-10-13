@@ -25,7 +25,7 @@ namespace Application.UseCases.AuthorsUseCases.AddAuthor
 
             if (authors == null || !authors.Any())
             {
-                throw new NotFoundException( "No authors found.");
+                throw new NotFoundException("No authors found.");
             }
 
             return _mapper.Map<IEnumerable<AuthorResponse>>(authors);
